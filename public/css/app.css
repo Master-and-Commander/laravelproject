@@ -7,11 +7,21 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
- .flag {
-  font-size: 3em;
-  color: brown
-}
+ .scorpion, .scorpion:hover {
+   color:yellow;
+   
+ }
+ .spider, .spider:hover {
+  color:#800000;
+ }
 
+.searchbar {
+  border:none;
+  color:#800000;
+}
+.pnext {
+  text-indent: 5em;
+}
 
 :root {
   --blue: #3490dc;
@@ -43,6 +53,8 @@
   --font-family-sans-serif: "Open Sans", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+
 
 *,
 *::before,
@@ -86,9 +98,12 @@ body {
 }
 
 hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
+  position: relative; 
+  top: 20px; 
+  border: none; 
+  height: 7px; 
+  background: #343a40; 
+  margin-bottom: 50px; 
 }
 
 h1,
@@ -5495,7 +5510,8 @@ a.badge-dark.focus {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  background-color: #343a40;
+  color: white;
   border-radius: 0.3rem;
 }
 

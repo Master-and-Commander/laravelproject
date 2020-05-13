@@ -17,7 +17,7 @@ class CreateSpidersTable extends Migration
           $table->bigIncrements('scorpion_id');
           $table->string('species_name', 25);
           $table->string('family_name', 25);
-          $table->multiLineString('description');
+          $table->string('description', 750);
           $table->string('habitat', 25);
           $table->integer('toxicity');
           $table->integer('size');
@@ -25,7 +25,6 @@ class CreateSpidersTable extends Migration
           $table->boolean('burrower');
           $table->boolean('climber');
           $table->integer('humidity');
-          $table->string('order', 25);
           $table->timestamps();
         });
     }

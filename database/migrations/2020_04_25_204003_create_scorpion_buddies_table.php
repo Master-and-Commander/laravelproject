@@ -15,12 +15,12 @@ class CreateScorpionBuddiesTable extends Migration
     {
         Schema::create('scorpion_buddies', function (Blueprint $table) {
             $table->bigIncrements('scorpionbuddy_id');
-            $table->foreignId('scorpion_id');
-            $table->foreignId('user_id');
+            $table->integer('scorpion_id');
+            $table->integer('user_id');
             $table->boolean('active');
             $table->string('buddy_name', 25);
             $table->timestamps();
-            $table->multiLineString('description');
+            $table->string('description', 755);
         });
     }
 

@@ -9,8 +9,17 @@ Route::get('/home', function () {
 });
 
 // General routes
-Route::get('/spider', ['uses' => 'SpiderController@showGeneral']);
-Route::get('/scorpion', ['uses' => 'ScorpionController@showGeneral']);
+Route::get('/', ['uses' => 'WelcomeController@generateMain']);
+Route::get('/creatures/{type}', ['uses' => 'CreatureController@generateMainArticle']);
+Route::get('/creatures/{type}/{id}', ['uses' => 'CreatureController@generateTypeArticle']);
+
+
+//ajax functions
+Route::post('/ajax/carousel', 'AjaxController@carouselHandler');
+
+Route::post('/search/{search}', ['uses' => 'SearchController@search']);
+
+
 Route::get('/setup', ['uses' => 'SetupController@showGeneral']);
 Route::get('/games', ['uses' => 'GameController@showGeneral']);
 Route::get('/about', ['uses' => 'SiteController@showAbout'] );

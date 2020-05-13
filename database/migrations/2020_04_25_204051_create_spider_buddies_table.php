@@ -15,11 +15,11 @@ class CreateSpiderBuddiesTable extends Migration
     {
         Schema::create('spider_buddies', function (Blueprint $table) {
           $table->bigIncrements('spiderbuddy_id');
-          $table->foreignId('spider_id');
-          $table->foreignId('user_id');
+          $table->integer('spider_id');
+          $table->integer('user_id');
           $table->boolean('active');
           $table->string('buddy_name', 25);
-          $table->multiLineString('description');
+          $table->string('description', 750);
           $table->timestamps();
         });
     }

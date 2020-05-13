@@ -5,13 +5,17 @@
     <div class="row justify-content-center">
     <div class="container">
   <div class="jumbotron">
-    <h1>{{ $name }}</h1>
-    <p >{{ $description }}</p>
+    <h1>Search</h1>
   </div>
 
+  <h2>Basic Facts</h2>
+ 
 
+  <h2>Common Questions</h2>
+ 
 
-</div>
-    </div>
+  <h2>Resources</h2>
+  
+
 </div>
 @endsection
