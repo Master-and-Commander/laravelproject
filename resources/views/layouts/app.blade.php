@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
-    
+    <script src="{{ asset('js/buildAsset.js') }}" defer></script>
     
 
     <!-- Fonts -->
@@ -27,11 +27,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <img src = "/images/scorpion2.png" class="arthropodiac-icon-home" style="fill:black" />
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Arthropodiac
                 </a>
+                <a class = "arthropodiac-home" href="{{ url('/home') }}">Home</a>
+                
                 <ul class="navbar-nav ml-auto">
-                <li class = "nav-item"> <form action="/search/" method="post" name="search"><input type="text" class = "searchbar"  placeholder="Search.."></form></li> 
+                
+                <li class = "nav-item"> <form  class="searchform" ><input type="text" class = "searchbar"  placeholder="Search.."></form></li> 
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -45,6 +49,12 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/games') }}">Games</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/forums') }}">Forums</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

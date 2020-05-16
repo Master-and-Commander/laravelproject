@@ -33,18 +33,22 @@ $(".item-carousel-btn-left").click(function(e){
     console.log("moving to the left  " );
   }); 
   
-  $(".cntrl-right, .cntrl-left").click(function(e) {
-      console.log("control right");
+  $(".cntrl-right, .cntrl-left, .carousel-dot ").click(function(e) {
+      //$(this).closest('.alternate-carousel').attr("style", "background-color: brown; color: red");
     e.preventDefault();
-    let offset = parseInt($('.alternate-item-carousel').attr('offset'));
+    let offset = parseInt($(this).closest('.alternate-carousel').find('.alternate-item-carousel').attr('offset'));
+    console.log("offset is " + offset);
     if($(this).hasClass("cntrl-right")) {
         offset = offset + 1;
+    }
+    else if ($(this).hasClass("carousel-dot")) {
+       offset = parseInt($(this).attr("item"));
     }
     else {
         offset = offset - 1;
     }
     let counter = 0;
-    $(".alternate-item").each(function() {
+    $(this).closest('.alternate-carousel').find('.alternate-item-carousel').children(".alternate-item").each(function() {
        if(counter <= offset * 3 + 2 && counter >= offset * 3 ) {      
         $(this).attr("style","width: 18rem; display: block");
        }
@@ -53,6 +57,45 @@ $(".item-carousel-btn-left").click(function(e){
        }
        counter++;
     });
-    $('.alternate-item-carousel').attr('offset', offset);
+    counter = 0;
+    $(this).closest('.alternate-carousel').find('.item-carousel-controller').children(".carousel-dot").each(function() {
+        if(counter == offset) {
+            $(this).attr("src","/images/selectedbar.png");
+        }
+        else {
+            $(this).attr("src","/images/unselectedbar.png");
+        }
+        
+           counter++;
+
+    });
+    $(this).closest('.alternate-carousel').children('.alternate-item-carousel').attr('offset', offset);
       
+  });
+
+  $(".searchform").submit(function(e){
+      e.preventDefault();
+      let search = $(this).children(".searchbar").val();
+      window.location.replace("/search/" + search);     
+  });
+
+  $(".arthropodiac-tab-selector").click(function(e) {
+    e.preventDefault();
+    console.log($(this).attr("value"));
+    $(this).closest('.arthropodiac-tab-selectors').children(".arthropodiac-tab-selector").each(function() {
+         $(this).removeClass("btn-primary");
+         $(this).addClass("btn-secondary");
+    });
+    $(this).removeClass("btn-secondary");
+    $(this).addClass("btn-primary");
+    let classSelected = "" + $(this).attr("value");
+    console.log("class selected: " + classSelected);
+    $(this).closest('.arthropodiac-tab-manager').attr("selectedtab", classSelected );
+
+    $(this).closest('.arthropodiac-tab-manager').children(".arthropodiac-tab").each(function() {
+        $(this).attr("style", "display: none");
+    });
+
+    $(this).closest('.arthropodiac-tab-manager').find("."+classSelected).attr("style", "display:block");
+
   });

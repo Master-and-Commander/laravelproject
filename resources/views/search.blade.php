@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-    <div class="container">
-  <div class="jumbotron">
-    <h1>Search</h1>
+
+  <div class="row">
+    <a class="btn btn-primary"> Advanced </a>
+    
   </div>
+  
 
   <h2>Basic Facts</h2>
  
@@ -17,5 +17,5 @@
   <h2>Resources</h2>
   
 
-</div>
+
 @endsection

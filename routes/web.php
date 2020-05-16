@@ -17,7 +17,8 @@ Route::get('/creatures/{type}/{id}', ['uses' => 'CreatureController@generateType
 //ajax functions
 Route::post('/ajax/carousel', 'AjaxController@carouselHandler');
 
-Route::post('/search/{search}', ['uses' => 'SearchController@search']);
+Route::get('/search/{search}', ['uses' => 'SearchController@search']);
+Route::get('/build/{flavor}', ['uses' => 'BuildController@build']);
 
 
 Route::get('/setup', ['uses' => 'SetupController@showGeneral']);
@@ -42,7 +43,7 @@ Route::get('/myspider/{spider}', ['uses' => 'SpiderController@showSpecific']);
 Route::get('/myscorpion/{scorpion}', ['uses' => 'ScorpionController@showSpecific']);
 
 
-Route::get('/build/{flavor}', ['uses' => 'BuildController@buildSpecific']);
+
 
 // setup routes
 Route::get('/setup/{setup}', ['uses' => 'SetupController@showSpecific']);
