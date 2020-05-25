@@ -1,0 +1,107 @@
+.chess-game-container {
+    background-image: url(/images/board2.png);
+    background-repeat: no-repeat;
+    z-index: 0;
+    justify-content: center;
+    min-width: 25em;
+    min-height: 25em;
+
+    max-height: 45em;
+    max-width: 45em;
+    display:block;
+    position: relative;
+    background-size: contain;
+    
+}
+.piece {
+    background-image: url(/images/rightstinger2.png);
+    width: 4em;
+    height:4em;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 500;
+   
+}
+
+.a8 {transform: translate(0, 0);}
+.b8 {transform: translate(80%, 0);}
+.c8 {transform: translate(160%, 0);}
+.d8 {transform: translate(320%, 0);}
+.e8 {transform: translate(400%, 0);}
+.f8 {transform: translate(480%, 0);}
+.g8 {transform: translate(560%, 0);}
+.h8 {transform: translate(640%, 0);}
+
+.a7 {transform: translate(0, 80%);}
+.b7 {transform: translate(80%, 80%);}
+.c7 {transform: translate(160%, 80%);}
+.d7 {transform: translate(320%, 80%);}
+.e7 {transform: translate(400%, 80%);}
+.f7 {transform: translate(480%, 80%);}
+.g7 {transform: translate(560%, 80%);}
+.h7 {transform: translate(640%, 80%);}
+
+.a6 {transform: translate(0, 160%);}
+.b6 {transform: translate(80%, 160%);}
+.c6 {transform: translate(160%, 160%);}
+.d6 {transform: translate(320%, 160%);}
+.e6 {transform: translate(400%, 160%);}
+.f6 {transform: translate(480%, 160%);}
+.g6 {transform: translate(560%, 160%);}
+.h6 {transform: translate(640%, 160%);}
+
+.a5 {transform: translate(0, 320%);}
+.b5 {transform: translate(80%, 320%);}
+.c5 {transform: translate(160%, 320%);}
+.d5 {transform: translate(320%, 320%);}
+.e5 {transform: translate(400%, 320%);}
+.f5 {transform: translate(480%, 320%);}
+.g5 {transform: translate(560%, 320%);}
+.h5 {transform: translate(640%, 320%);}
+
+.a4 {transform: translate(0, 400%);}
+.b4 {transform: translate(80%, 400%);}
+.c4 {transform: translate(160%, 400%);}
+.d4 {transform: translate(320%, 400%);}
+.e4 {transform: translate(400%, 400%);}
+.f4 {transform: translate(480%, 400%);}
+.g4 {transform: translate(560%, 400%);}
+.h4 {transform: translate(640%, 400%);}
+
+.a3 {transform: translate(0, 480%);}
+.b3 {transform: translate(80%, 480%);}
+.c3 {transform: translate(160%, 480%);}
+.d3 {transform: translate(320%, 480%);}
+.e3 {transform: translate(400%, 480%);}
+.f3 {transform: translate(480%, 480%);}
+.g3 {transform: translate(560%, 480%);}
+.h3 {transform: translate(640%, 480%);}
+
+.a2 {transform: translate(0, 560%);}
+.b2 {transform: translate(80%, 560%);}
+.c2 {transform: translate(160%, 560%);}
+.d2 {transform: translate(320%, 560%);}
+.e2 {transform: translate(400%, 560%);}
+.f2 {transform: translate(480%, 560%);}
+.g2 {transform: translate(560%, 560%);}
+.h2 {transform: translate(640%, 560%);}
+
+.a1 {transform: translate(0, 640%);}
+.b1 {transform: translate(80%, 640%);}
+.c1 {transform: translate(160%, 640%);}
+.d1 {transform: translate(320%, 640%);}
+.e1 {transform: translate(400%, 640%);}
+.f1 {transform: translate(480%, 640%);}
+.g1 {transform: translate(560%, 640%);}
+.h1 {transform: translate(640%, 640%);}
+
+.white-king {
+}
+
+.black-queen {
+}
+
+.white-knight {
+
+}

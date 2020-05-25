@@ -13,4 +13,10 @@ class GameController extends Controller
         $data['game'] = $game;
         return view('gameSpecific',$data);
     }
+
+    public function showChess()
+    {
+        $data['test'] = "test";
+        return view('gameChess', $data);
+    }
 }

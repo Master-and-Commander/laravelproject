@@ -6,8 +6,6 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
-
  .scorpion, .scorpion:hover {
    color:yellow;
    
@@ -22,6 +20,12 @@
    height: 4em;
    width: 5em;
    background-size: cover;
+ }
+
+ .arthropodiac-logo-welcome {
+  height: 20em;
+  width: 25em;
+  background-size: cover;
  }
  .arthropodiac-hr-carousel {
    margin-left: auto;

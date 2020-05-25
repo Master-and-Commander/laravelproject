@@ -14,7 +14,7 @@
 					</p>
 				</div>
 				<div class ="col-md-6">
-					<img src = "images/scorpion3.png" />
+					<img src = "images/scorpion3.png" class ="arthropodiac-logo-welcome" />
 				</div>
 			</div>
 			

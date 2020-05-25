@@ -19,6 +19,7 @@ class CreateScorpionBuddiesTable extends Migration
             $table->integer('user_id');
             $table->boolean('active');
             $table->string('buddy_name', 25);
+            $table->string('sellprice')->nullable();
             $table->timestamps();
             $table->string('description', 755);
         });

@@ -1,3 +1,6 @@
+let article = new Array();
+
+
 $(".togglebuildsteps").on("click change",function (e) {
     //e.preventDefault();
     console.log("type: " + e.type);
@@ -92,4 +95,14 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
    }
    
 
+});
+
+$(".article-builder").click(function (e) {
+    let articleControllerNode = $(this).closest(".arthropodiac-step-7").find(".article-controller");
+    let currentSelection = parseInt(articleControllerNode.attr('section-selected'));
+    
+    if (currentSelection == 0) {
+      let header = $("#article-title").val();
+      article.push({type:"title", header:"Doe", content:""});
+    }
 });

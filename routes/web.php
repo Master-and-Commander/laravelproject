@@ -23,6 +23,7 @@ Route::get('/build/{flavor}', ['uses' => 'BuildController@build']);
 
 Route::get('/setup', ['uses' => 'SetupController@showGeneral']);
 Route::get('/games', ['uses' => 'GameController@showGeneral']);
+Route::get('/games/chess', ['uses' => 'GameController@showChess']);
 Route::get('/about', ['uses' => 'SiteController@showAbout'] );
 Route::get('/editprofile', ['uses' => 'UserController@showGeneral']);
 

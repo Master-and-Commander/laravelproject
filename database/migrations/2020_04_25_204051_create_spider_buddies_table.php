@@ -19,6 +19,7 @@ class CreateSpiderBuddiesTable extends Migration
           $table->integer('user_id');
           $table->boolean('active');
           $table->string('buddy_name', 25);
+          $table->string('sellprice')->nullable();
           $table->string('description', 750);
           $table->timestamps();
         });

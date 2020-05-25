@@ -11,10 +11,21 @@
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/custom.js') }}" defer></script>
-    <script src="{{ asset('js/buildAsset.js') }}" defer></script>
-    
+
+
+    <?php $uri = $_SERVER['REQUEST_URI']; ?>
+    <?php if(strpos($uri, 'chess') !== false): ?>
+        <script src="{{ asset('js/gameChess.js') }}" defer></script>
+        <link href="{{ asset('css/chess.css') }}" rel="stylesheet">
+
+    <?php endif ?>
+
+    <?php if(strpos($uri, 'build') !== false): ?>
+        <script src="{{ asset('js/buildAsset.js') }}" defer></script>
+    <?php endif ?>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,7 +38,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img src = "/images/scorpion2.png" class="arthropodiac-icon-home" style="fill:black" />
+                <img src = "/images/scorpion3.png" class="arthropodiac-icon-home" />
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Arthropodiac
                 </a>
