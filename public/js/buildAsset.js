@@ -1,5 +1,5 @@
 let article = new Array();
-
+let sectionCounter = 0;
 
 $(".togglebuildsteps").on("click change",function (e) {
     //e.preventDefault();
@@ -100,9 +100,37 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
 $(".article-builder").click(function (e) {
     let articleControllerNode = $(this).closest(".arthropodiac-step-7").find(".article-controller");
     let currentSelection = parseInt(articleControllerNode.attr('section-selected'));
-    
-    if (currentSelection == 0) {
-      let header = $("#article-title").val();
-      article.push({type:"title", header:"Doe", content:""});
+    console.log("hello " + currentSelection);
+    // if title add title to preview and make display  none and now show the section option
+    if (currentSelection == 0) {    
+      let entry = {type:"title", counter: sectionCounter, header:$("#article-title").val(), content:$("#article-introduction").val()};
+      console.log(entry);
+      article.push(entry);
     }
+    
+    else {
+        let entry = {type:"section",  counter: sectionCounter, header:$("#section-header").val(), content:$("#section-content").val()};
+        console.log(entry);
+        article.push(entry);
+      }
+
+      let preview = "";
+      article.forEach(function(item, index) {
+        if(item.type == "title") {
+            preview += "<h1>"+ item.header+"</h1>";
+            preview += "<p>"+ item.content + "</p>";
+         }
+         else {
+            preview += "<h2>"+ item.header+"</h2>";
+            preview += "<p>"+ item.content + "</p>";
+
+         }
+      });
+      $(".article-preview").empty().append(preview);
+
+      $(".initial-article").attr("style", "display:none");
+      $(".next-section").attr("style", "display:block");
+
+      sectionCounter++;
+      articleControllerNode.attr('section-selected', sectionCounter)
 });

@@ -121,7 +121,7 @@
                         </div>
                         <div class="form-group">
                             <label for="article-introduction">Article Introduction</label>
-                            <input type="textarea" class="form-control" id="article-title" placeholder="Intro">
+                            <input type="textarea" class="form-control" id="article-introduction" placeholder="Intro">
                         </div>
                         <div>
                             <div class="section-article" style="display: none">
@@ -131,18 +131,18 @@
                         </div>
                         
                     </div>
-                    <div class="next-section" style="display:hidden">
+                    <div class="next-section" style="display:none">
                         <div class="form-group">
-                            <label for="article-title">Section header</label>
-                            <input type="text" class="form-control" id="article-title" placeholder="Title">
+                            <label for="section-header">Section header</label>
+                            <input type="text" class="form-control" id="section-header" placeholder="Animals can also be different colors">
                         </div>
                         <div class="form-group">
-                            <label for="article-title">Section content</label>
-                            <input type="textarea" class="form-control" id="article-title" placeholder="Title">
+                            <label for="section-content">Section content</label>
+                            <input type="textarea" class="form-control" id="section-content" placeholder="Blue and purple, while uncommon, can still be spotted today... ">
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn article-builder">Add</button>
+                <button type="button" class="btn btn-secondary article-builder">Add</button>
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-8" ready="false" style="display: none" next="arthropodiac-step-9" previous="arthropodiac-step-7">
                 <h2>Photos/ Resources to share?</h2>
