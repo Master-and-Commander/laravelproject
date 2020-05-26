@@ -100,37 +100,48 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
 $(".article-builder").click(function (e) {
     let articleControllerNode = $(this).closest(".arthropodiac-step-7").find(".article-controller");
     let currentSelection = parseInt(articleControllerNode.attr('section-selected'));
-    console.log("hello " + currentSelection);
+    let preview = "";
+    let editingSection = false;
+    let entry = "";
+    article.forEach(function(item, index) {
+        if(item.counter == currentSelection) {editingSection = true;}         
+      });
     // if title add title to preview and make display  none and now show the section option
-    if (currentSelection == 0) {    
-      let entry = {type:"title", counter: sectionCounter, header:$("#article-title").val(), content:$("#article-introduction").val()};
-      console.log(entry);
-      article.push(entry);
-    }
-    
+    if (currentSelection == 0) {entry = {type:"title", counter: 0, header:$("#article-title").val(), content:$("#article-introduction").val()};}
     else {
-        let entry = {type:"section",  counter: sectionCounter, header:$("#section-header").val(), content:$("#section-content").val()};
-        console.log(entry);
-        article.push(entry);
+        entry = {type:"section",  counter: currentSelection, header:$("#section-header").val(), content:$("#section-content").val()};
+        $("#section-header").val("");
+        $("#section-content").val("");
       }
-
-      let preview = "";
-      article.forEach(function(item, index) {
+    // treat edited section differently
+    if(editingSection) {article[currentSelection] = entry;}
+    else {article.push(entry);}
+    // update preview
+    article.forEach(function(item, index) {
         if(item.type == "title") {
-            preview += "<h1>"+ item.header+"</h1>";
-            preview += "<p>"+ item.content + "</p>";
+            preview += "<h1>"+ item.header+"</h1>" + "<p>"+ item.content + "</p>";
+            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Title </button>";
          }
          else {
-            preview += "<h2>"+ item.header+"</h2>";
-            preview += "<p>"+ item.content + "</p>";
-
+            preview += "<h2>"+ item.header+"</h2>" + "<p>"+ item.content + "</p>";
+            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Section </button>";
          }
       });
       $(".article-preview").empty().append(preview);
-
       $(".initial-article").attr("style", "display:none");
       $(".next-section").attr("style", "display:block");
+     // update next step if need be    
+     if(!editingSection) {sectionCounter++;}
+     articleControllerNode.attr('section-selected', sectionCounter);});
 
-      sectionCounter++;
-      articleControllerNode.attr('section-selected', sectionCounter)
-});
+function editSection(sectionStep) {
+  $(".arthropodiac-step-7").find(".article-controller").attr('section-selected', ""+sectionStep);
+  if(sectionStep == 0) {
+      $(".initial-article").attr("style", "display:block");
+      $(".next-section").attr("style", "display:none");
+  }
+  else {
+      $("#section-header").val(article[sectionStep].header);
+      $("#section-content").val(article[sectionStep].content);
+  }
+}

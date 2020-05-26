@@ -12,6 +12,7 @@
 * 9: Invitation to share
 */
 ?>
+
     <div class="container buildobjectform">
         <form class="buildobject" step="arthropodiac-step-1">
 
@@ -124,8 +125,6 @@
                             <input type="textarea" class="form-control" id="article-introduction" placeholder="Intro">
                         </div>
                         <div>
-                            <div class="section-article" style="display: none">
-                            </div>
 
                             
                         </div>
