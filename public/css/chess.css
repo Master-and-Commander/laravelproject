@@ -2,12 +2,8 @@
     background-image: url(/images/board2.png);
     background-repeat: no-repeat;
     z-index: 0;
-    justify-content: center;
-    min-width: 25em;
-    min-height: 25em;
-
-    max-height: 45em;
-    max-width: 45em;
+    height:360px;
+    width:360px;
     display:block;
     position: relative;
     background-size: contain;
@@ -15,8 +11,8 @@
 }
 .piece {
     background-image: url(/images/rightstinger2.png);
-    width: 4em;
-    height:4em;
+    width: 45px;
+    height: 45px;
     position: absolute;
     background-size: cover;
     background-repeat: no-repeat;

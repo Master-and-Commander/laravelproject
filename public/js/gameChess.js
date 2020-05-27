@@ -34,6 +34,8 @@ $("html").on("dragleave", function(event) {
     $(this).removeClass('dragging');
 });
 
+
+
 function returnNewSquare(elementHeight, elementWidth, endX, endY) {
   let distanceX = endX - beginningX;
   let distanceY = endY - beginningY;
@@ -48,35 +50,34 @@ function returnNewSquare(elementHeight, elementWidth, endX, endY) {
 }
 $("html").click(function(e) {
     let offset = $('.chess-game-container').offset();
-    let startY = offset.left;
-    let startX = offset.top;
+    let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
+    let rows = [8, 7, 6, 5, 4, 3, 2, 1];
+    let x = columns[ Math.ceil(( e.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
+    let y = rows[ Math.ceil((e.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
+   
     
-    console.log("startY " + startY + " startX: " + startX);
-    console.log("clienty " + e.offsetY + " client x: " + e.offsetX );
+    // display what square is being clicked
+    console.log("clicked square is " + x+y);
     
 });
+
+function calculateClickedSquare(x, y) {
+    let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
+    let rows = [8, 7, 6, 5, 4, 3, 2, 1];
+    return 4;
+
+
+}
 $("html").on("drop", function(event) {
     event.preventDefault();  
     event.stopPropagation();
+
     let offset = $('.chess-game-container').offset();
-    let startY = offset.left;
-    let startX = offset.top;
-    let elementWidth = $('.chess-game-container').width()/8;
-    let elementHeight =  $('.chess-game-container').height()/8;
-
-    console.log("first width: " + $('.chess-game-container').width()/8 );
-    console.log("second width: " + $('.chess-game-container').find("." + lastClicked).width());
-
-    console.log("first height: " + $('.chess-game-container').height()/8 );
-    console.log("second height: " +$('.chess-game-container').find("." + lastClicked).height() );
+    let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
+    let rows = [8, 7, 6, 5, 4, 3, 2, 1];
+    let x = columns[ Math.ceil(( event.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
+    let y = rows[ Math.ceil((event.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
     
-    elementWidth =  $('.chess-game-container').find("." + lastClicked).width();
-    elementHeight =   $('.chess-game-container').find("." + lastClicked).height();
-    
-    let nextClass = returnNewSquare(elementHeight, elementWidth, event.clientX, event.clientY);
-    console.log("next class: " + nextClass);
-    // have to determine which square client x and client y is on
-    // x
-    //console.log("end x: " +  event.clientX + " y: " + event.clientY);
-    $('.chess-game-container').find("." + lastClicked).removeClass(lastClicked).addClass(nextClass);
+    $('.chess-game-container').find("." + lastClicked).removeClass(lastClicked).addClass(x+y+"");
+    console.log("moved to " + x + y);
 });
