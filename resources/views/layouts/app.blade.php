@@ -25,6 +25,7 @@
 
     <?php if(strpos($uri, 'build') !== false): ?>
         <script src="{{ asset('js/buildAsset.js') }}" defer></script>
+        <link href="{{ asset('css/buildAsset.css') }}" rel="stylesheet">
     <?php endif ?>
 
     <!-- Fonts -->

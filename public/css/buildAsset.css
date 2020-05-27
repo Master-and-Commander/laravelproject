@@ -1,0 +1,22 @@
+
+
+
+.article-preview .article-title {
+   font-size: .75em;
+}
+
+.article-preview .article-intro-content {
+    font-size: .5em;
+}
+
+.article-preview .article-section-title {
+    font-size: .5em;
+} 
+
+.article-preview .article-section-content {
+    font-size: .5em;
+}
+
+.edit-section-button {
+    margin-left: auto!important;
+}

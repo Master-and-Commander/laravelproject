@@ -2,9 +2,7 @@ let article = new Array();
 let sectionCounter = 0;
 
 $(".togglebuildsteps").on("click change",function (e) {
-    //e.preventDefault();
-    console.log("type: " + e.type);
-
+   
     let next = $(this).attr("setnext");
     let newprevious = $(this).closest(".buildobject").attr("step");
     // set the next step
@@ -39,6 +37,14 @@ $(".arthropodiac-required").on("click change", function(e) {
             case("amount") :
             break;
             case("database") :
+            break;
+            case("article") :
+              console.log("something here");
+              if(article.length < 3) {
+                  disable = false;
+                  console.log("Length is " + article.length);
+                  
+              }
             break;
         }
     });
@@ -119,12 +125,12 @@ $(".article-builder").click(function (e) {
     // update preview
     article.forEach(function(item, index) {
         if(item.type == "title") {
-            preview += "<h1>"+ item.header+"</h1>" + "<p>"+ item.content + "</p>";
-            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Title </button>";
+            preview += "<h1 class='article-title'>"+ item.header+"</h1>" + "<div class='row'> <p class='article-intro-content'>"+ item.content + "</p>";
+            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Title </button> </div>";
          }
          else {
-            preview += "<h2>"+ item.header+"</h2>" + "<p>"+ item.content + "</p>";
-            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Section </button>";
+            preview += "<h2 class='article-section-title'>"+ item.header+"</h2>" +"<div class='row'> <p class='article-section-content'>"+ item.content + "</p>";
+            preview +=  "<button type='button' class='btn btn-secondary edit-section-button' onclick='editSection("+ item.counter +")' > Edit Section </button> </div>";
          }
       });
       $(".article-preview").empty().append(preview);

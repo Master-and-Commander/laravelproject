@@ -112,9 +112,10 @@
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-7" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-6">
                 <h2>Article</h2>
-
-                <div class="article-preview"> </div>
-                <div class="arthropodiac-required article-controller" mode="article" section-selected="0">
+                <br />
+                <div class="row arthropodiac-required" mode="article"> 
+                <div class="article-preview col-md-6"> </div>
+                <div class="article-controller col-md-4" section-selected="0" style="display:flex">
                     <div class="initial-article" style="display: block">
                         <div class="form-group">
                             <label for="article-title">Title</label>
@@ -142,6 +143,7 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-secondary article-builder">Add</button>
+            </div>
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-8" ready="false" style="display: none" next="arthropodiac-step-9" previous="arthropodiac-step-7">
                 <h2>Photos/ Resources to share?</h2>
