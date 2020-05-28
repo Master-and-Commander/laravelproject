@@ -6,6 +6,7 @@
 
     <div class='chess-game-container'>
       <div class='piece white-king b5' draggable= "true" ></div>
+      <div class='square b5'></div>
     </div>
 
 
