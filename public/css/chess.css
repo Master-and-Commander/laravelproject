@@ -7,6 +7,8 @@
     display:block;
     position: relative;
     background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
     
 }
 .piece {
@@ -21,76 +23,76 @@
 }
 
 .a8 {transform: translate(0, 0);}
-.b8 {transform: translate(80%, 0);}
-.c8 {transform: translate(160%, 0);}
-.d8 {transform: translate(320%, 0);}
+.b8 {transform: translate(100%, 0);}
+.c8 {transform: translate(200%, 0);}
+.d8 {transform: translate(300%, 0);}
 .e8 {transform: translate(400%, 0);}
-.f8 {transform: translate(480%, 0);}
-.g8 {transform: translate(560%, 0);}
-.h8 {transform: translate(640%, 0);}
+.f8 {transform: translate(500%, 0);}
+.g8 {transform: translate(600%, 0);}
+.h8 {transform: translate(700%, 0);}
 
-.a7 {transform: translate(0, 80%);}
-.b7 {transform: translate(80%, 80%);}
-.c7 {transform: translate(160%, 80%);}
-.d7 {transform: translate(320%, 80%);}
-.e7 {transform: translate(400%, 80%);}
-.f7 {transform: translate(480%, 80%);}
-.g7 {transform: translate(560%, 80%);}
-.h7 {transform: translate(640%, 80%);}
+.a7 {transform: translate(0, 100%);}
+.b7 {transform: translate(100%, 100%);}
+.c7 {transform: translate(200%, 100%);}
+.d7 {transform: translate(300%, 100%);}
+.e7 {transform: translate(400%, 100%);}
+.f7 {transform: translate(500%, 100%);}
+.g7 {transform: translate(600%, 100%);}
+.h7 {transform: translate(700%, 100%);}
 
-.a6 {transform: translate(0, 160%);}
-.b6 {transform: translate(80%, 160%);}
-.c6 {transform: translate(160%, 160%);}
-.d6 {transform: translate(320%, 160%);}
-.e6 {transform: translate(400%, 160%);}
-.f6 {transform: translate(480%, 160%);}
-.g6 {transform: translate(560%, 160%);}
-.h6 {transform: translate(640%, 160%);}
+.a6 {transform: translate(0, 200%);}
+.b6 {transform: translate(100%, 200%);}
+.c6 {transform: translate(200%, 200%);}
+.d6 {transform: translate(300%, 200%);}
+.e6 {transform: translate(400%, 200%);}
+.f6 {transform: translate(500%, 200%);}
+.g6 {transform: translate(600%, 200%);}
+.h6 {transform: translate(700%, 200%);}
 
-.a5 {transform: translate(0, 320%);}
-.b5 {transform: translate(80%, 320%);}
-.c5 {transform: translate(160%, 320%);}
-.d5 {transform: translate(320%, 320%);}
-.e5 {transform: translate(400%, 320%);}
-.f5 {transform: translate(480%, 320%);}
-.g5 {transform: translate(560%, 320%);}
-.h5 {transform: translate(640%, 320%);}
+.a5 {transform: translate(0, 300%);}
+.b5 {transform: translate(100%, 300%);}
+.c5 {transform: translate(200%, 300%);}
+.d5 {transform: translate(300%, 300%);}
+.e5 {transform: translate(400%, 300%);}
+.f5 {transform: translate(500%, 300%);}
+.g5 {transform: translate(600%, 300%);}
+.h5 {transform: translate(700%, 300%);}
 
 .a4 {transform: translate(0, 400%);}
-.b4 {transform: translate(80%, 400%);}
-.c4 {transform: translate(160%, 400%);}
-.d4 {transform: translate(320%, 400%);}
+.b4 {transform: translate(100%, 400%);}
+.c4 {transform: translate(200%, 400%);}
+.d4 {transform: translate(300%, 400%);}
 .e4 {transform: translate(400%, 400%);}
-.f4 {transform: translate(480%, 400%);}
-.g4 {transform: translate(560%, 400%);}
-.h4 {transform: translate(640%, 400%);}
+.f4 {transform: translate(500%, 400%);}
+.g4 {transform: translate(600%, 400%);}
+.h4 {transform: translate(700%, 400%);}
 
-.a3 {transform: translate(0, 480%);}
-.b3 {transform: translate(80%, 480%);}
-.c3 {transform: translate(160%, 480%);}
-.d3 {transform: translate(320%, 480%);}
-.e3 {transform: translate(400%, 480%);}
-.f3 {transform: translate(480%, 480%);}
-.g3 {transform: translate(560%, 480%);}
-.h3 {transform: translate(640%, 480%);}
+.a3 {transform: translate(0, 500%);}
+.b3 {transform: translate(100%, 500%);}
+.c3 {transform: translate(200%, 500%);}
+.d3 {transform: translate(300%, 500%);}
+.e3 {transform: translate(400%, 500%);}
+.f3 {transform: translate(500%, 500%);}
+.g3 {transform: translate(600%, 500%);}
+.h3 {transform: translate(700%, 500%);}
 
-.a2 {transform: translate(0, 560%);}
-.b2 {transform: translate(80%, 560%);}
-.c2 {transform: translate(160%, 560%);}
-.d2 {transform: translate(320%, 560%);}
-.e2 {transform: translate(400%, 560%);}
-.f2 {transform: translate(480%, 560%);}
-.g2 {transform: translate(560%, 560%);}
-.h2 {transform: translate(640%, 560%);}
+.a2 {transform: translate(0, 600%);}
+.b2 {transform: translate(100%, 600%);}
+.c2 {transform: translate(200%, 600%);}
+.d2 {transform: translate(300%, 600%);}
+.e2 {transform: translate(400%, 600%);}
+.f2 {transform: translate(500%, 600%);}
+.g2 {transform: translate(600%, 600%);}
+.h2 {transform: translate(700%, 600%);}
 
-.a1 {transform: translate(0, 640%);}
-.b1 {transform: translate(80%, 640%);}
-.c1 {transform: translate(160%, 640%);}
-.d1 {transform: translate(320%, 640%);}
-.e1 {transform: translate(400%, 640%);}
-.f1 {transform: translate(480%, 640%);}
-.g1 {transform: translate(560%, 640%);}
-.h1 {transform: translate(640%, 640%);}
+.a1 {transform: translate(0, 700%);}
+.b1 {transform: translate(100%, 700%);}
+.c1 {transform: translate(200%, 700%);}
+.d1 {transform: translate(300%, 700%);}
+.e1 {transform: translate(400%, 700%);}
+.f1 {transform: translate(500%, 700%);}
+.g1 {transform: translate(600%, 700%);}
+.h1 {transform: translate(700%, 700%);}
 
 .white-king {
 }
