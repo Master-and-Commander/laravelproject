@@ -5,13 +5,11 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="container">
-			<div class="jumbotron row">
+			<div class="jumbotron row arthropodiac-banner">
 				<div class = "col-md-6" >
-					<h1>Delve deep into Arthropods!</h1>
-					<p >Everything from the 
-						<a href="/creatures/scorpion" class="scorpion font-weight-bold">Scorpion</a> to the 
-						<a href="/creatures/spider" class="spider font-weight-bold">Spider</a>
-					</p>
+					<h1 class = "arthropodiac-banner-header"></h1>
+					<hr class= "arthropodiac-banner-hr" />
+					<p class = "arthropodiac-banner-content"></p>
 				</div>
 				<div class ="col-md-6">
 					<img src = "images/scorpion3.png" class ="arthropodiac-logo-welcome" />
@@ -20,19 +18,11 @@
 			
 	 
       
-	  <h2>Did you know? </h2>
+	  <h1> Arthropodiac </h2>
 	  <hr />
 	  <p> <span class="font-weight-bold"> Trolls exist! </span> asdfasdf </p> 
 	  
-	  <h2> In the News </h2>
-	  <hr />
-	  <p> <span class="font-weight-bold">5.14.2020</span> Elsewhere in the world.. </p> 
-	  
-	  <h2> Quote of the Day </h2>
-	  <hr />
-      <p> <span class="font-weight-bold"> Monday the 14th </span> A scorpion's sting is worse than its bite </p> 
-
-			
+	  	
       <h2> Popular </h2>
       <hr />
       <br />

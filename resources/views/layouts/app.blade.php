@@ -28,6 +28,13 @@
         <link href="{{ asset('css/buildAsset.css') }}" rel="stylesheet">
     <?php endif ?>
 
+    <?php if($uri == '/'): ?>
+        <script src="{{ asset('js/welcome.js') }}" defer></script>
+    <?php endif ?>
+
+    
+
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

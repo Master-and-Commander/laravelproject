@@ -5,10 +5,20 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+*/
+
+
+  .arthropodiac-banner {
+    background-image: radial-gradient(#004d00 ,#005500);
+  }
+
  .scorpion, .scorpion:hover {
    color:yellow;
    
+ }
+
+ .arthropodiac-banner-hr {
+    width:0px;
  }
 
  .arthropod-species-select {
