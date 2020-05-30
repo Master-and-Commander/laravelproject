@@ -27,5 +27,14 @@ class AjaxController extends Controller
             'offset' => $offset
             ]);
     }
+
+    public function buildSpecific(Request $request) {
+        $intent = $request->intent;
+        $data = $request->data;
+        $article = $request->article;
+        return response()->json([
+            'debug'=>'Data is successfully added for ' . $intent
+            ]);
+    }
     
 }

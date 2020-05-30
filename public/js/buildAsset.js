@@ -1,5 +1,6 @@
 let article = new Array();
 let sectionCounter = 0;
+let data = new Array();
 
 $(".togglebuildsteps").on("click change",function (e) {
    
@@ -39,10 +40,8 @@ $(".arthropodiac-required").on("click change", function(e) {
             case("database") :
             break;
             case("article") :
-              console.log("something here");
               if(article.length < 3) {
                   disable = false;
-                  console.log("Length is " + article.length);
                   
               }
             break;
@@ -64,17 +63,40 @@ $(".arthropodiac-required").on("click change", function(e) {
 
 });
 
+function fetchStep(classString) {
+   var startingIndex = classString.search('arthropodiac-step-');
+   var returnString = classString.substring(startingIndex);
+   var returnString = returnString.trim();
+   return returnString;
+}
+
 $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(function(e) {
     
    e.preventDefault();
    if($(this).hasClass("disabled")) {
-
-   }
-   else {
-    let current = $(this).closest(".buildobject").attr("step");
-    let next = 0;   
-    
-    if ($(this).hasClass("arthropodiac-build-step-next")) {
+    return;
+  }
+   let lastStep = false;
+   let current = $(this).closest(".buildobject").attr("step");
+   let currentElement = $(this).closest(".buildobject").find("."+current);
+   let inputClass = "";
+   let entry = "";
+   let next = 0;    
+   
+   if ( $(this).closest(".buildobject").find("." + ( $(this).closest(".buildobject").attr("step"))).hasClass("last-step") && ($(this).hasClass("arthropodiac-build-step-next"))) 
+   {
+    console.log("this was the last step");
+    lastStep = true;
+    $("input").each(function(){
+        inputClass = fetchStep("" + $(this).closest(".arthropodiac-build-step").attr("class"));
+        entry = {class: inputClass, value: $(this).val(), id: $(this).attr("id") };
+        data.push(entry);
+        console.log("entry " + entry);
+ 
+    });
+   }   
+        
+    if ($(this).hasClass("arthropodiac-build-step-next")&& (!lastStep)) {
         next = $(this).closest(".buildobject").children("." + current).attr("next");
         $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-previous").removeClass("disabled");
         
@@ -83,24 +105,26 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
             $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-next").addClass("disabled");
         }
     }
-    else {
+    else if ($(this).hasClass("arthropodiac-build-step-previous")) {
         next = $(this).closest(".buildobject").children("." + current).attr("previous");
         // make sure that next is not disabled
         $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-next").removeClass("disabled");
     }
- 
-    $(this).closest(".buildobject").children(".arthropodiac-build-step").each(function(){
-        if($(this).hasClass(next)) {$(this).attr("style", "display: block");}
-        else {$(this).attr("style", "display: none");}
-    });
-    $(this).closest(".buildobject").attr("step", next);
-    if ($(this).closest(".buildobject").attr("step") == "arthropodiac-step-1" ) {
-        $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-previous").addClass("disabled");
+    if(lastStep) {
+        submitForm();
     }
-
-   }
-   
-
+    else {
+        $(this).closest(".buildobject").children(".arthropodiac-build-step").each(function(){
+            if($(this).hasClass(next)) {$(this).attr("style", "display: block");}
+            else {$(this).attr("style", "display: none");}
+        });
+        $(this).closest(".buildobject").attr("step", next);
+        if ($(this).closest(".buildobject").attr("step") == "arthropodiac-step-1" ) {
+            $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-previous").addClass("disabled");
+        }  
+    }
+    
+    
 });
 
 $(".article-builder").click(function (e) {
@@ -138,7 +162,8 @@ $(".article-builder").click(function (e) {
       $(".next-section").attr("style", "display:block");
      // update next step if need be    
      if(!editingSection) {sectionCounter++;}
-     articleControllerNode.attr('section-selected', sectionCounter);});
+     articleControllerNode.attr('section-selected', sectionCounter);
+    });
 
 function editSection(sectionStep) {
   $(".arthropodiac-step-7").find(".article-controller").attr('section-selected', ""+sectionStep);
@@ -150,4 +175,28 @@ function editSection(sectionStep) {
       $("#section-header").val(article[sectionStep].header);
       $("#section-content").val(article[sectionStep].content);
   }
+}
+
+function submitForm() {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/ajax/buildspecific",
+        method: 'post',
+        data: {
+           intent: $("input[name='addingoptions']:checked").attr("id"),
+           article: article,
+           data: data
+        },
+        success: function(result){
+            console.log('received ' + result['debug']);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.log("textStatus: " + textStatus + " error: " + errorThrown + " etc: " + JSON.stringify(XMLHttpRequest));
+        }     
+    });
+    console.log("submitting the form  " );
 }

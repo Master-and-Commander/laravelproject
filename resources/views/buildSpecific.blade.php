@@ -145,10 +145,23 @@
                 <button type="button" class="btn btn-secondary article-builder">Add</button>
             </div>
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-8" ready="false" style="display: none" next="arthropodiac-step-9" previous="arthropodiac-step-7">
+            <div class="arthropodiac-build-step arthropodiac-step-8" ready="true" style="display: none" next="arthropodiac-step-9" previous="arthropodiac-step-7">
                 <h2>Photos/ Resources to share?</h2>
+                <div class="resource-links">
+                    <div class="form-group">
+                        <label for="resource-explanation">Link explanation</label>
+                        <input type="textarea" class="form-control" id="resource-explanation" placeholder="Resource on the biology of relevant flowers... ">
+                    </div>
+                    <div class="form-group">
+                        <label for="resource-link">Link</label>
+                        <input type="textarea" class="form-control" id="resource-link" placeholder="www.google.com">
+                    </div>
+                </div>
+                <label for="pictures_upload">Pictures: </label>
+                <input multiple id="pictures_upload" name="pictures[]" type="file">
+
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-9" ready="false" style="display: none" next="arthropodiac-step-10" previous="arthropodiac-step-8">
+            <div class="arthropodiac-build-step arthropodiac-step-9 last-step" ready="true" style="display: none" next="arthropodiac-step-10" previous="arthropodiac-step-8">
                 <h2>would you like to share?</h2>
             </div>
             <hr />
