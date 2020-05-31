@@ -27,25 +27,11 @@ $(".piece").on("click drag", function(e) {
       let coordinatePieces =  lastClicked.split('');
       let toMoveX = columns.indexOf(coordinatePieces[0]);
       let toMoveY = rows.indexOf(parseInt(coordinatePieces[1]));
-      let options = "";
-      actionBegun = true;
-      console.log("you have clicked on a " + pieceClicked);
+      let options = returnOptions(pieceClicked, toMoveX, toMoveY);
+      $('.chess-game-container').append(options);
       
-      console.log("toMoveX " + toMoveX + " toMoveY " + toMoveY);
-      switch(pieceClicked) {
-          case(playercolor+ "-king"):
-          console
-          options += "<div class='square " + columns[toMoveX+1] + rows[toMoveY+1] + "'></div>";
-          options += "<div class='square " + columns[toMoveX+1] + rows[toMoveY] + "'></div>";
-          options += "<div class='square " + columns[toMoveX+1] + rows[toMoveY-1] + "'></div>";
-          options += "<div class='square " + columns[toMoveX] + rows[toMoveY-1] + "'></div>";
-          options += "<div class='square " + columns[toMoveX-1] + rows[toMoveY-1] + "'></div>";
-          options += "<div class='square " + columns[toMoveX-1] + rows[toMoveY+1] + "'></div>";
-          options += "<div class='square " + columns[toMoveX-1] + rows[toMoveY] + "'></div>";
-          options += "<div class='square " + columns[toMoveX] + rows[toMoveY+1] + "'></div>";
-          $('.chess-game-container').append(options);
-          break;
-      };
+      actionBegun = true;
+      
   }
 });
 
@@ -55,6 +41,52 @@ $("html").on("dragover", function(event) {
     event.stopPropagation();
     $(this).addClass('dragging');
 });
+
+function returnOptions(piece, toMoveX, toMoveY) {
+    let options = "";
+    let upDirectionCounter = 1;
+    let leftDirectionCounter = 1;
+    let rightDirectionCounter = 1;
+    let downDirectionCounter = 1;
+    let leftTopDirectionCounter = 1;
+    let leftBottomDirectionCounter = 1;
+    let rightTopDirectionCounter = 1;
+    let rightBottomDirectionCounter = 1;
+    // diagonal movements
+  if(piece == (playercolor + "-queen" )|| piece == (playercolor + "-bishop")) {
+    while((toMoveX + rightBottomDirectionCounter < 8) && (toMoveY + rightBottomDirectionCounter < 8)) {
+        options += "<div class='square " + columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)++] + "'></div>";
+      }
+
+      while((toMoveX - leftBottomDirectionCounter > (-1) ) && (toMoveY + leftBottomDirectionCounter < 8))  {
+        options += "<div class='square " + columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)++] + "'></div>";
+      }
+
+      while((toMoveX + rightTopDirectionCounter < 8 ) && (toMoveY  - rightTopDirectionCounter > (-1))) {
+        options += "<div class='square " + columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)++] + "'></div>";
+      }
+
+      while((toMoveX  - leftTopDirectionCounter > (-1) ) && (toMoveY  - leftTopDirectionCounter > (-1))) {
+        options += "<div class='square " + columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)++] + "'></div>";
+      }
+  }
+  // movements along axis
+  if(piece ==  (playercolor +"-rook") || piece ==( playercolor +  "-queen")) {
+    while(toMoveY + downDirectionCounter < 8) {
+        options += "<div class='square " + columns[toMoveX] + rows[toMoveY+(downDirectionCounter)++] + "'></div>";
+      }
+      while(toMoveY - upDirectionCounter > (-1) ) {
+        options += "<div class='square " + columns[toMoveX] + rows[toMoveY-(upDirectionCounter)++] + "'></div>";
+      }
+      while(toMoveX + rightDirectionCounter < 8) {
+        options += "<div class='square " + columns[toMoveX+(rightDirectionCounter)++] + rows[toMoveY] + "'></div>";
+      }
+      while(toMoveX - leftDirectionCounter > (-1) ) {
+        options += "<div class='square " + columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY] + "'></div>";
+      }
+  }
+  return options;
+}
 
 $("html").on("dragstart click", function(event) {
     beginningX = event.clientX;
