@@ -7,6 +7,11 @@ let playercolor = "white";
 let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
 let rows = [8, 7, 6, 5, 4, 3, 2, 1];
 
+let coordinatePieces =  [];
+let toMoveX = "";
+let toMoveY = "";
+let options = [];
+
 $(".piece").on("click drag", function(e) {
   $('.square').remove();
   e.preventDefault();
@@ -24,11 +29,15 @@ $(".piece").on("click drag", function(e) {
   }
 
   if(e.type == "click") {
-      let coordinatePieces =  lastClicked.split('');
-      let toMoveX = columns.indexOf(coordinatePieces[0]);
-      let toMoveY = rows.indexOf(parseInt(coordinatePieces[1]));
-      let options = returnOptions(pieceClicked, toMoveX, toMoveY);
-      $('.chess-game-container').append(options);
+      coordinatePieces =  lastClicked.split('');
+      toMoveX = columns.indexOf(coordinatePieces[0]);
+      toMoveY = rows.indexOf(parseInt(coordinatePieces[1]));
+      options = returnOptions(pieceClicked, toMoveX, toMoveY);
+
+      for(x in options) {
+        $('.chess-game-container').append("<div class='square " + options[x] + "'></div>");
+      }
+      //$('.chess-game-container').append(options);
       
       actionBegun = true;
       
@@ -43,7 +52,8 @@ $("html").on("dragover", function(event) {
 });
 
 function returnOptions(piece, toMoveX, toMoveY) {
-    let options = "";
+    
+    let options = [];
     let upDirectionCounter = 1;
     let leftDirectionCounter = 1;
     let rightDirectionCounter = 1;
@@ -54,38 +64,47 @@ function returnOptions(piece, toMoveX, toMoveY) {
     let rightBottomDirectionCounter = 1;
     // diagonal movements
   if(piece == (playercolor + "-queen" )|| piece == (playercolor + "-bishop")) {
-    while((toMoveX + rightBottomDirectionCounter < 8) && (toMoveY + rightBottomDirectionCounter < 8)) {
-        options += "<div class='square " + columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)++] + "'></div>";
-      }
+    while((toMoveX + rightBottomDirectionCounter < 8) && (toMoveY + rightBottomDirectionCounter < 8) && 
+    ($('.chess-game-container').find("." +columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)]+".piece").length == 0)) 
+      {options.push(columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)++]);}
 
-      while((toMoveX - leftBottomDirectionCounter > (-1) ) && (toMoveY + leftBottomDirectionCounter < 8))  {
-        options += "<div class='square " + columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)++] + "'></div>";
-      }
+    while((toMoveX - leftBottomDirectionCounter > (-1) ) && (toMoveY + leftBottomDirectionCounter < 8) && 
+    ($('.chess-game-container').find("." +columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)]+".piece").length == 0))  
+      {options.push(columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)++]);}
 
-      while((toMoveX + rightTopDirectionCounter < 8 ) && (toMoveY  - rightTopDirectionCounter > (-1))) {
-        options += "<div class='square " + columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)++] + "'></div>";
-      }
+    while((toMoveX + rightTopDirectionCounter < 8 ) && (toMoveY  - rightTopDirectionCounter > (-1)) && 
+    ($('.chess-game-container').find("." +columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)]+".piece").length == 0)) 
+      {options.push(columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)++]);}
 
-      while((toMoveX  - leftTopDirectionCounter > (-1) ) && (toMoveY  - leftTopDirectionCounter > (-1))) {
-        options += "<div class='square " + columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)++] + "'></div>";
-      }
+    while((toMoveX  - leftTopDirectionCounter > (-1) ) && (toMoveY  - leftTopDirectionCounter > (-1)) && 
+    ($('.chess-game-container').find("." +columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)]+".piece").length == 0)) 
+      {options.push(columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)++]);}
   }
   // movements along axis
   if(piece ==  (playercolor +"-rook") || piece ==( playercolor +  "-queen")) {
-    while(toMoveY + downDirectionCounter < 8) {
-        options += "<div class='square " + columns[toMoveX] + rows[toMoveY+(downDirectionCounter)++] + "'></div>";
-      }
-      while(toMoveY - upDirectionCounter > (-1) ) {
-        options += "<div class='square " + columns[toMoveX] + rows[toMoveY-(upDirectionCounter)++] + "'></div>";
-      }
-      while(toMoveX + rightDirectionCounter < 8) {
-        options += "<div class='square " + columns[toMoveX+(rightDirectionCounter)++] + rows[toMoveY] + "'></div>";
-      }
-      while(toMoveX - leftDirectionCounter > (-1) ) {
-        options += "<div class='square " + columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY] + "'></div>";
-      }
+    while(toMoveY + downDirectionCounter < 8 && 
+      ($('.chess-game-container').find("." +columns[toMoveX] + rows[toMoveY+(downDirectionCounter)]+".piece").length == 0)) 
+     {options.push(columns[toMoveX] + rows[toMoveY+(downDirectionCounter)++]);}
+
+    while(toMoveY - upDirectionCounter > (-1) && 
+    ($('.chess-game-container').find("." +columns[toMoveX] + rows[toMoveY+(upDirectionCounter)]+".piece").length == 0) ) 
+     {options.push(columns[toMoveX] + rows[toMoveY-(upDirectionCounter)++]);}
+
+    while(toMoveX + rightDirectionCounter < 8 && 
+      ($('.chess-game-container').find("." +columns[toMoveX+(rightDirectionCounter)] + rows[toMoveY]+".piece").length == 0)) 
+      {options.push(columns[toMoveX+(rightDirectionCounter)++] + rows[toMoveY]);}
+
+    while(toMoveX - leftDirectionCounter > (-1) && 
+    ($('.chess-game-container').find("." +columns[toMoveX-(leftDirectionCounter)] + rows[toMoveY]+".piece").length == 0)) 
+      {options.push(columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY]);}
   }
   return options;
+}
+
+function pieceOnSquare(square) {
+  let response = false;
+  if($('.chess-game-container').find("." +square+".piece").length == 1);
+
 }
 
 $("html").on("dragstart click", function(event) {
@@ -119,13 +138,19 @@ $("html").click(function(e) {
     let x = columns[ Math.ceil(( e.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
     let y = rows[ Math.ceil((e.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
    
-    
-    // display what square is being clicked
-    console.log("clicked square is " + x+y);
 
     //check a piece has been clicked
+    let options = returnOptions(pieceClicked, toMoveX, toMoveY);
     if(actionBegun) {
+      if(options.indexOf(x+y+"") != -1) {
         $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
+        $('.square').remove();
+        
+      }
+      else {
+        console.log("movement not authorized");
+      }
+      
 
     }
     // if a piece has been clicked, initiate action
@@ -147,7 +172,16 @@ $("html").on("drop", function(event) {
     let rows = [8, 7, 6, 5, 4, 3, 2, 1];
     let x = columns[ Math.ceil(( event.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
     let y = rows[ Math.ceil((event.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
+
+
     
-    $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
-    console.log("moved to " + x + y);
+    let options = returnOptions(pieceClicked, toMoveX, toMoveY);
+    if(options.indexOf(x+y+"") != -1) {
+      $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
+      console.log("moved to " + x + y);
+    }
+    else {
+      console.log("movement not authorized");
+    }
+    
 });
