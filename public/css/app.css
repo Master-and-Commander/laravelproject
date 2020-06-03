@@ -19,6 +19,7 @@
 
  .arthropodiac-banner-hr {
     width:0px;
+    box-shadow: 2px 2px 5px #000000;
  }
 
  .arthropod-species-select {
@@ -33,8 +34,8 @@
  }
 
  .arthropodiac-logo-welcome {
-  height: 20em;
-  width: 25em;
+  height: 10em;
+  width: 15em;
   background-size: cover;
  }
  .arthropodiac-hr-carousel {

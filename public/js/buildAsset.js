@@ -73,6 +73,7 @@ function fetchStep(classString) {
 $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(function(e) {
     
    e.preventDefault();
+   
    if($(this).hasClass("disabled")) {
     return;
   }
@@ -112,6 +113,7 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
     }
     if(lastStep) {
         submitForm();
+        window.location = "/";
     }
     else {
         $(this).closest(".buildobject").children(".arthropodiac-build-step").each(function(){
@@ -121,7 +123,14 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
         $(this).closest(".buildobject").attr("step", next);
         if ($(this).closest(".buildobject").attr("step") == "arthropodiac-step-1" ) {
             $(this).closest(".arthropodiac-build-step-controller").find(".arthropodiac-build-step-previous").addClass("disabled");
+        }
+        // if next step is last step, change text from "next" to "finish"
+        if($(this).closest(".buildobject").find("." + next).hasClass("last-step")) {
+            $(".arthropodiac-build-step-next").html("Finish");
         }  
+        else {
+            $(".arthropodiac-build-step-next").html("Next");
+        }
     }
     
     
@@ -178,6 +187,10 @@ function editSection(sectionStep) {
 }
 
 function submitForm() {
+    var formData = {};
+    $(".buildobject").find("input[name]").each(function (index, node) {
+        formData[node.name] = node.value;
+    });
     $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -189,7 +202,7 @@ function submitForm() {
         data: {
            intent: $("input[name='addingoptions']:checked").attr("id"),
            article: article,
-           data: data
+           data: formData
         },
         success: function(result){
             console.log('received ' + result['debug']);

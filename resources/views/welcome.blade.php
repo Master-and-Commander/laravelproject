@@ -3,25 +3,22 @@
 @section('content')
 
 <div class="container">
-	<div class="row justify-content-center">
-		<div class="container">
-			<div class="jumbotron row arthropodiac-banner">
-				<div class = "col-md-6" >
-					<h1 class = "arthropodiac-banner-header"></h1>
-					<hr class= "arthropodiac-banner-hr" />
-					<p class = "arthropodiac-banner-content"></p>
-				</div>
-				<div class ="col-md-6">
-					<img src = "images/scorpion3.png" class ="arthropodiac-logo-welcome" />
-				</div>
-			</div>
+	
+	<div class="jumbotron arthropodiac-banner">
+			<h1 class = "arthropodiac-banner-header"></h1>
+			<hr class= "arthropodiac-banner-hr" />
+			<p class = "arthropodiac-banner-content"></p>
+	</div>
 			
 	 
-      
-	  <h1> Arthropodiac </h2>
-	  <hr />
-	  <p> <span class="font-weight-bold"> Trolls exist! </span> asdfasdf </p> 
-	  
+	<h1> Arthropodiac </h1>
+	<hr />
+	<div class="row">	
+	<img src = "images/scorpion3.png" class ="arthropodiac-logo-welcome" />
+	<p> <span class="font-weight-bold"> Trolls exist! </span> asdfasdf </p> 	  
+	</div>
+
+	
 	  	
       <h2> Popular </h2>
       <hr />

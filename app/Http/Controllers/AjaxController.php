@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Article;
+use App\ArticleContent;
 
 class AjaxController extends Controller
 {
@@ -29,11 +31,30 @@ class AjaxController extends Controller
     }
 
     public function buildSpecific(Request $request) {
-        $intent = $request->intent;
-        $data = $request->data;
-        $article = $request->article;
+        $article = $request->input('article');
+        $debug = "";
+        $newArticle = new Article;
+        
+        $id = "";
+        foreach($article as $input) {
+            if($input['type'] == "title") {
+                $newArticle->title = $input['header'];
+                $newArticle->introduction = $input['content'];
+                $newArticle->save();
+                $id = $newArticle->id;
+            }
+            else {
+                $newContent = new ArticleContent;
+                $newContent->article_id = $id;
+                $newContent->header = $input['header'];
+                $newContent->content = $input['content'];
+                $newContent->step = $input['counter'];
+                $newContent->save();
+            }
+            $debug .= $input['content'];
+        }
         return response()->json([
-            'debug'=>'Data is successfully added for ' . $intent
+            'debug'=>$debug
             ]);
     }
     
