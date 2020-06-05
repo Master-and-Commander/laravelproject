@@ -6,6 +6,8 @@ let pieceClicked = "";
 let playercolor = "white";
 let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
 let rows = [8, 7, 6, 5, 4, 3, 2, 1];
+let pawnIdentities = [1,1,1,1,1,1,1,1];
+
 
 let coordinatePieces =  [];
 let toMoveX = "";
@@ -98,7 +100,46 @@ function returnOptions(piece, toMoveX, toMoveY) {
     ($('.chess-game-container').find("." +columns[toMoveX-(leftDirectionCounter)] + rows[toMoveY]+".piece").length == 0)) 
       {options.push(columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY]);}
   }
+  if(piece == (playercolor+"-pawn")) {
+    options.push(columns[toMoveX] + rows[toMoveY-1]);
+    options.push(columns[toMoveX] + rows[toMoveY-2]);
+  }
+  if(piece == (playercolor+"-knight")) {
+    let loop = [[-1, -1],[1, -1], [1,1], [-1,1]];
+    for(var j = 0; j < 4; j++) {
+      if(applyConstraints(toMoveX+2*loop[j][0], toMoveY+1*loop[j][1])){
+        console.log("calculating " + (toMoveX+2*loop[j][0]));
+        options.push(columns[toMoveX+2*loop[j][0]] + rows[toMoveY+1*loop[j][1]]);
+      }
+      
+      if(applyConstraints(columns[toMoveX+1*loop[j][0]], toMoveY+2*loop[j][1] )){
+        console.log("calculating " + (toMoveY+2*loop[j][1]));
+        options.push(columns[toMoveX+1*loop[j][0]] + rows[toMoveY+2*loop[j][1]]);
+      }
+    }
+
+  }
+  if(piece == (playercolor+"-king")) {
+    let loop = [[0, -1],[0, 1], [1,1], [1,0], [1,-1],  [-1,1], [-1,0], [-1,-1] ];
+
+    for(var j = 0; j < loop.length; j++) {
+      if(applyConstraints(toMoveX + loop[j][0], toMoveY + loop[j][1])) {
+        options.push(columns[toMoveX +  loop[j][0]] + rows[toMoveY+ loop[j][1]]);
+      }
+    }
+
+  }
   return options;
+}
+
+function applyConstraints(x, y) 
+{
+   let response = true;
+   if (x < 0 || x > 7 || y < 0 || y > 8) {
+     response = false;
+     return response;
+   }
+   return response;
 }
 
 function pieceOnSquare(square) {
@@ -117,8 +158,6 @@ $("html").on("dragleave", function(event) {
     event.stopPropagation();
     $(this).removeClass('dragging');
 });
-
-
 
 function returnNewSquare(elementHeight, elementWidth, endX, endY) {
   let distanceX = endX - beginningX;
