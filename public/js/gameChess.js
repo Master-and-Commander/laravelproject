@@ -4,6 +4,7 @@ let beginningY = 0;
 let actionBegun = false;
 let pieceClicked = "";
 let playercolor = "white";
+let enemycolor = "black";
 let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
 let rows = [8, 7, 6, 5, 4, 3, 2, 1];
 let pawnIdentities = [1,1,1,1,1,1,1,1];
@@ -16,6 +17,7 @@ let options = [];
 
 $(".piece").on("click drag", function(e) {
   $('.square').remove();
+  $('.square-attack').remove();
   e.preventDefault();
   console.log("type " + e.type );
 
@@ -54,7 +56,7 @@ $("html").on("dragover", function(event) {
 });
 
 function returnOptions(piece, toMoveX, toMoveY) {
-    
+    console.log("checking " + toMoveX + toMoveY);
     let options = [];
     let upDirectionCounter = 1;
     let leftDirectionCounter = 1;
@@ -101,19 +103,30 @@ function returnOptions(piece, toMoveX, toMoveY) {
       {options.push(columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY]);}
   }
   if(piece == (playercolor+"-pawn")) {
+    if(applyConstraints(toMoveX, toMoveY-1))
     options.push(columns[toMoveX] + rows[toMoveY-1]);
-    options.push(columns[toMoveX] + rows[toMoveY-2]);
+    if(pawnIdentities[returnPawnIdentity()] == 1 && applyConstraints(toMoveX, toMoveY-2 )) {
+      options.push(columns[toMoveX] + rows[toMoveY-2]);
+    }
+    if(canAttackSquare(pieceClicked, toMoveX-1, toMoveY-1)) {
+      $('.chess-game-container').append("<div class='square-attack " + columns[ toMoveX-1] + rows[ toMoveY-1] + "'></div>");
+      options.push(columns[toMoveX-1] + rows[toMoveY-1]);
+    }
+    if(canAttackSquare(pieceClicked, toMoveX+1, toMoveY-1)) {
+      $('.chess-game-container').append("<div class='square-attack " + columns[ toMoveX+1] + rows[ toMoveY-1]  + "'></div>");
+      options.push(columns[toMoveX+1] + rows[toMoveY-1]);
+    }
+
   }
   if(piece == (playercolor+"-knight")) {
     let loop = [[-1, -1],[1, -1], [1,1], [-1,1]];
     for(var j = 0; j < 4; j++) {
       if(applyConstraints(toMoveX+2*loop[j][0], toMoveY+1*loop[j][1])){
-        console.log("calculating " + (toMoveX+2*loop[j][0]));
         options.push(columns[toMoveX+2*loop[j][0]] + rows[toMoveY+1*loop[j][1]]);
       }
       
       if(applyConstraints(columns[toMoveX+1*loop[j][0]], toMoveY+2*loop[j][1] )){
-        console.log("calculating " + (toMoveY+2*loop[j][1]));
+        
         options.push(columns[toMoveX+1*loop[j][0]] + rows[toMoveY+2*loop[j][1]]);
       }
     }
@@ -132,6 +145,14 @@ function returnOptions(piece, toMoveX, toMoveY) {
   return options;
 }
 
+function canAttackSquare(piece, x, y){
+  let canAttack = false;
+  let classes = $('.chess-game-container').find("." + columns[x] + rows[y]).attr("class") + "";
+  if(classes.includes(enemycolor))
+     canAttack = true;
+  return canAttack;
+}
+
 function applyConstraints(x, y) 
 {
    let response = true;
@@ -140,6 +161,10 @@ function applyConstraints(x, y)
      return response;
    }
    return response;
+}
+
+function returnPawnIdentity () {
+  return 4;
 }
 
 function pieceOnSquare(square) {
@@ -182,8 +207,13 @@ $("html").click(function(e) {
     let options = returnOptions(pieceClicked, toMoveX, toMoveY);
     if(actionBegun) {
       if(options.indexOf(x+y+"") != -1) {
+        if(pieceClicked.includes("pawn")) {
+          pawnIdentities[returnPawnIdentity()] = 0;
+          console.log("setting index " + lastClicked + " to 0 " );
+        }
         $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
         $('.square').remove();
+        $('.square-attack').remove();
         
       }
       else {
@@ -215,9 +245,13 @@ $("html").on("drop", function(event) {
 
     
     let options = returnOptions(pieceClicked, toMoveX, toMoveY);
+    
     if(options.indexOf(x+y+"") != -1) {
+      if(pieceClicked.includes("pawn")) {
+        pawnIdentities[returnPawnIdentity()] = 0;
+      }
       $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
-      console.log("moved to " + x + y);
+      
     }
     else {
       console.log("movement not authorized");
