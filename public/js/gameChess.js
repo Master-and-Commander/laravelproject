@@ -1,13 +1,50 @@
+// if a piece is clicked
+// set pieceX and piece Y and actionbegun to true
+// if a square is clicked and actionbegun is true and piece can move there
+// move the piece
 
-let beginningX = 0;
-let beginningY = 0;
+// only pieceX and pieceY need to be supplied to method
+
 let actionBegun = false;
 let pieceClicked = "";
+let pieceX = 0;
+let pieceY = 0;
+let nextX = 0;
+let nextY = 0;
 let playercolor = "white";
 let enemycolor = "black";
 let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
 let rows = [8, 7, 6, 5, 4, 3, 2, 1];
 let pawnIdentities = [1,1,1,1,1,1,1,1];
+let hasKingMoved = false;
+let check = false;
+
+
+let positions = {
+ "white-pawn" : [[0,6], [1,6], [2,6], [3,6], [4,6], [5,6], [6,6], [7,6]],
+ "white-king" : [[4,7]],
+ "white-knight" : [[1,7],[6,7]],
+ "white-bishop" : [[2,7], [5, 7]],
+ "white-rook" : [[0,7], [7, 7]],
+ "white-queen" : [[3,7]],
+ "black-pawn" : [[0,1], [1,1], [2,1], [3,1], [4,1], [5,1], [6,1], [7,1]],
+ "black-king" : [[4,0]],
+ "black-knight" : [[1,0],[6,0]],
+ "black-bishop" : [[2,0], [5, 0]],
+ "black-rook" : [[0,0], [7, 0]],
+ "black-queen" : [[3,0]],
+}
+let newShadow = positions;
+// index 0 is type where 0 = range, 1 = square, 2 = special. indices 1 and 2 are x and y, 
+let scopes = 
+{
+  "pawn" : [[2,0,-1],[2,0,-2], [2,-1,-1 ], [2,1,-1]],
+  "king" : [[1,1,1],[1,1,0],[1,1,-1],[1,0,1],[1,0,-1],[1,-1,1],[1,-1,0],[1,-1,-1], [2,-2,0], [2,2,0]],
+  "knight" : [[1,2,1], [1,-2,-1], [1,-2,1], [1,2,-1], [1,1,2], [1,-1,-2], [1,-1,2], [1,1,-2]],
+  "bishop" :[[0,1,1],[0,-1,-1],[0,-1,1],[0,1,-1]],
+  "rook" : [[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]],
+  "queen" : [[0,1,1],[0,-1,-1],[0,-1,1],[0,1,-1], [0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]
+}
 
 
 let coordinatePieces =  [];
@@ -15,168 +52,304 @@ let toMoveX = "";
 let toMoveY = "";
 let options = [];
 
-$(".piece").on("click drag", function(e) {
-  $('.square').remove();
-  $('.square-attack').remove();
+
+$('.hidden-square').on("drop click", function(e) {
   e.preventDefault();
-  console.log("type " + e.type );
-
-  processString = $(this).attr("class");
-  processString = processString.split(" ");
-  for (var i = 0; i < processString.length; i++) {
-      if (processString[i].length == 2)  {
-          lastClicked = processString[i];
-      }
-      else if (processString[i] != "piece") {
-          pieceClicked = processString[i];
-      }
+  if(actionBegun) {
+    $('.square').remove();
+  $('.square-attack').remove();
+  let square = $(this).attr("class").match(/[a-h][1-8]/g);
+  let recentlyClickedPiece  = getPieceFromSquare(pieceX, pieceY) + "";
+  let options = returnOptions(playercolor, enemycolor, recentlyClickedPiece.substring(recentlyClickedPiece.indexOf('-') + 1), pieceX, pieceY, "first");
+  
+  
+  if(options.indexOf(square + "") != -1) {
+    if(recentlyClickedPiece.includes("pawn")) {
+      pawnIdentities[returnPawnIdentity(pieceX, pieceY)] = 0;
+    }
+    if(recentlyClickedPiece.includes("king")) {
+      hasKingMoved = true;
+    }
+    // moved the touched piece
+    $(".piece."+square).remove();
+    $('.chess-game-container').find("." + recentlyClickedPiece + ".piece."+columns[pieceX] + rows[pieceY]).removeClass(lastClicked).addClass(square);
+    $('.square').remove();
+    $('.square-attack').remove();
+    actionBegun = false;
+    
   }
-
-  if(e.type == "click") {
-      coordinatePieces =  lastClicked.split('');
-      toMoveX = columns.indexOf(coordinatePieces[0]);
-      toMoveY = rows.indexOf(parseInt(coordinatePieces[1]));
-      options = returnOptions(pieceClicked, toMoveX, toMoveY);
-
-      for(x in options) {
-        $('.chess-game-container').append("<div class='square " + options[x] + "'></div>");
-      }
-      //$('.chess-game-container').append(options);
-      
-      actionBegun = true;
-      
   }
+  
 });
 
+$(".piece").on("click drag drop", function(e) {
+  
+  // only recognize pieces from own side
+  let processString = $(this).attr("class");
+  let recentlyClickedPiece = "";
+  if (processString.includes(playercolor)) {
+    actionBegun = true;
+    $('.square').remove();
+    $('.square-attack').remove();
+    e.preventDefault();
+
+    lastClicked = processString.match(/[a-h][0-9]/g) + "";
+    stringtosplit = lastClicked.split('');
+    pieceX = columns.indexOf(stringtosplit[0]);
+    pieceY = rows.indexOf(parseInt(stringtosplit[1]));
+    recentlyClickedPiece = getPieceFromSquare(pieceX, pieceY) + "";
+    console.log(recentlyClickedPiece.substring(recentlyClickedPiece.indexOf('-') + 1));
+    options = returnOptions(playercolor, enemycolor, recentlyClickedPiece.substring(recentlyClickedPiece.indexOf('-') + 1), pieceX, pieceY, "first");
+        for(x in options) {
+          $('.chess-game-container').append("<div class='square " + options[x] + "'></div>");
+        } 
+
+  }
+
+  else if(processString.includes(enemycolor) && actionBegun) {
+    recentlyClickedPiece = getPieceFromSquare(pieceX, pieceY) + "";
+    if(recentlyClickedPiece.includes("pawn")) {
+      pawnIdentities[returnPawnIdentity(pieceX, pieceY)] = 0;
+    }
+    if(recentlyClickedPiece.includes("king")) {
+      hasKingMoved = true;
+    }
+    let square = $(this).attr("class").match(/[a-h][1-8]/g) + "";
+    let splitSquare = square.split('');
+    let x = columns.indexOf(splitSquare[0]);
+    let y = rows.indexOf(parseInt(splitSquare[1]));
+    if (options.indexOf(square + "") != -1) {
+       // get rid of any pieces that might be there
+    $(".piece."+square).remove();
+    // moved the touched piece
+    $('.chess-game-container').find("." + recentlyClickedPiece + ".piece."+columns[pieceX] + rows[pieceY]).removeClass(lastClicked).addClass(square);
+    $('.square').remove();
+    $('.square-attack').remove();
+
+     updateShadow(recentlyClickedPiece, pieceX, pieceY, x, y);
+    }
+          
+  }
+
+  
+  
+});
+
+// make sure there is a current version of the position
+function updateShadow(piece, bx, by, ex, ey) {
+  //first check if there are any existing pieces on ex and ey and set their values to 0;
+  for(var key in positions) {
+    var value = positions[key];
+    for (var k = 0; k < value.length; k++) {
+      if(value[k][0] == ex && value[k][1] == ey) {
+        // this piece is the destroyed one
+        console.log(key + " has been destroyed ");
+        value[k][0] = 100;
+        value[k][1] = 100;
+      }
+    }
+  }
+  
+  for(var i = 0; i < positions[piece]; i++) {
+    if(positions[piece][i][0] == bx && positions[piece][i][1] == by) {
+      positions[piece][i][0] = ex;
+      positions[piece][i][1] = ey;
+    }
+  }
+
+}
+
 $("html").on("dragover", function(event) {
-    $('.chess-game-container').remove('.square');
     event.preventDefault();  
     event.stopPropagation();
     $(this).addClass('dragging');
 });
 
-function returnOptions(piece, toMoveX, toMoveY) {
-    console.log("checking " + toMoveX + toMoveY);
-    let options = [];
-    let upDirectionCounter = 1;
-    let leftDirectionCounter = 1;
-    let rightDirectionCounter = 1;
-    let downDirectionCounter = 1;
-    let leftTopDirectionCounter = 1;
-    let leftBottomDirectionCounter = 1;
-    let rightTopDirectionCounter = 1;
-    let rightBottomDirectionCounter = 1;
-    // diagonal movements
-  if(piece == (playercolor + "-queen" )|| piece == (playercolor + "-bishop")) {
-    while((toMoveX + rightBottomDirectionCounter < 8) && (toMoveY + rightBottomDirectionCounter < 8) && 
-    ($('.chess-game-container').find("." +columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)]+".piece").length == 0)) 
-      {options.push(columns[toMoveX+(rightBottomDirectionCounter)] + rows[toMoveY+(rightBottomDirectionCounter)++]);}
+function getPieceFromSquare(x,y) {
+  let classes = $('.chess-game-container').find(".piece." + columns[x] + rows[y]).attr("class");
+  let matching = classes.match(/(white|black)-[a-z]+/g);
+  return matching;
+}
 
-    while((toMoveX - leftBottomDirectionCounter > (-1) ) && (toMoveY + leftBottomDirectionCounter < 8) && 
-    ($('.chess-game-container').find("." +columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)]+".piece").length == 0))  
-      {options.push(columns[toMoveX-(leftBottomDirectionCounter)] + rows[toMoveY+(leftBottomDirectionCounter)++]);}
 
-    while((toMoveX + rightTopDirectionCounter < 8 ) && (toMoveY  - rightTopDirectionCounter > (-1)) && 
-    ($('.chess-game-container').find("." +columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)]+".piece").length == 0)) 
-      {options.push(columns[toMoveX+(rightTopDirectionCounter)] + rows[toMoveY-(rightTopDirectionCounter)++]);}
+function returnOptions(pColor, eColor, piece, x, y, tag) {
+  
 
-    while((toMoveX  - leftTopDirectionCounter > (-1) ) && (toMoveY  - leftTopDirectionCounter > (-1)) && 
-    ($('.chess-game-container').find("." +columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)]+".piece").length == 0)) 
-      {options.push(columns[toMoveX-(leftTopDirectionCounter)] + rows[toMoveY-(leftTopDirectionCounter)++]);}
-  }
-  // movements along axis
-  if(piece ==  (playercolor +"-rook") || piece ==( playercolor +  "-queen")) {
-    while(toMoveY + downDirectionCounter < 8 && 
-      ($('.chess-game-container').find("." +columns[toMoveX] + rows[toMoveY+(downDirectionCounter)]+".piece").length == 0)) 
-     {options.push(columns[toMoveX] + rows[toMoveY+(downDirectionCounter)++]);}
-
-    while(toMoveY - upDirectionCounter > (-1) && 
-    ($('.chess-game-container').find("." +columns[toMoveX] + rows[toMoveY+(upDirectionCounter)]+".piece").length == 0) ) 
-     {options.push(columns[toMoveX] + rows[toMoveY-(upDirectionCounter)++]);}
-
-    while(toMoveX + rightDirectionCounter < 8 && 
-      ($('.chess-game-container').find("." +columns[toMoveX+(rightDirectionCounter)] + rows[toMoveY]+".piece").length == 0)) 
-      {options.push(columns[toMoveX+(rightDirectionCounter)++] + rows[toMoveY]);}
-
-    while(toMoveX - leftDirectionCounter > (-1) && 
-    ($('.chess-game-container').find("." +columns[toMoveX-(leftDirectionCounter)] + rows[toMoveY]+".piece").length == 0)) 
-      {options.push(columns[toMoveX-(leftDirectionCounter)++] + rows[toMoveY]);}
-  }
-  if(piece == (playercolor+"-pawn")) {
-    if(applyConstraints(toMoveX, toMoveY-1))
-    options.push(columns[toMoveX] + rows[toMoveY-1]);
-    if(pawnIdentities[returnPawnIdentity()] == 1 && applyConstraints(toMoveX, toMoveY-2 )) {
-      options.push(columns[toMoveX] + rows[toMoveY-2]);
-    }
-    if(canAttackSquare(pieceClicked, toMoveX-1, toMoveY-1)) {
-      $('.chess-game-container').append("<div class='square-attack " + columns[ toMoveX-1] + rows[ toMoveY-1] + "'></div>");
-      options.push(columns[toMoveX-1] + rows[toMoveY-1]);
-    }
-    if(canAttackSquare(pieceClicked, toMoveX+1, toMoveY-1)) {
-      $('.chess-game-container').append("<div class='square-attack " + columns[ toMoveX+1] + rows[ toMoveY-1]  + "'></div>");
-      options.push(columns[toMoveX+1] + rows[toMoveY-1]);
-    }
-
-  }
-  if(piece == (playercolor+"-knight")) {
-    let loop = [[-1, -1],[1, -1], [1,1], [-1,1]];
-    for(var j = 0; j < 4; j++) {
-      if(applyConstraints(toMoveX+2*loop[j][0], toMoveY+1*loop[j][1])){
-        options.push(columns[toMoveX+2*loop[j][0]] + rows[toMoveY+1*loop[j][1]]);
-      }
-      
-      if(applyConstraints(columns[toMoveX+1*loop[j][0]], toMoveY+2*loop[j][1] )){
-        
-        options.push(columns[toMoveX+1*loop[j][0]] + rows[toMoveY+2*loop[j][1]]);
+  options = [];
+  let pieceScope = scopes[piece];
+  let response = "";
+  for(var i = 0; i < pieceScope.length; i++) {
+    if(pieceScope[i][0] == 0) {
+      // go through range
+      for (var j = 1; j < 8 ; j++) {
+        response = canMoveToSquare(piece, pColor, eColor, x+j*pieceScope[i][1], y+j*pieceScope[i][2], tag);
+        if(response == 1) 
+        {options.push(columns[x+j*pieceScope[i][1]] + rows[y+j*pieceScope[i][2]]);}
+        else 
+        {break;}
       }
     }
-
-  }
-  if(piece == (playercolor+"-king")) {
-    let loop = [[0, -1],[0, 1], [1,1], [1,0], [1,-1],  [-1,1], [-1,0], [-1,-1] ];
-
-    for(var j = 0; j < loop.length; j++) {
-      if(applyConstraints(toMoveX + loop[j][0], toMoveY + loop[j][1])) {
-        options.push(columns[toMoveX +  loop[j][0]] + rows[toMoveY+ loop[j][1]]);
+    else if(pieceScope[i][0] == 1) {
+      response = canMoveToSquare(piece, pColor, eColor,x+pieceScope[i][1], y+pieceScope[i][2], tag);
+      if(response == 1) {
+        options.push(columns[x+pieceScope[i][1]] + rows[y+pieceScope[i][2]]);
       }
+      // go through 1 square
     }
-
+    else if(pieceScope[i][0] == 2) {
+        if(specialOptionisPossible(pColor, eColor, piece, pieceScope[i][1], pieceScope[i][2])) {
+          options.push(columns[x+pieceScope[i][1]] + rows[y+pieceScope[i][2]]);
+        }
+    }
   }
   return options;
 }
 
-function canAttackSquare(piece, x, y){
-  let canAttack = false;
-  let classes = $('.chess-game-container').find("." + columns[x] + rows[y]).attr("class") + "";
-  if(classes.includes(enemycolor))
-     canAttack = true;
-  return canAttack;
-}
-
-function applyConstraints(x, y) 
-{
-   let response = true;
-   if (x < 0 || x > 7 || y < 0 || y > 8) {
-     response = false;
-     return response;
+function specialOptionisPossible(pColor, eColor, piece, x, y) {
+   switch(piece) {
+     case(pawn) :
+       return pawnHandler(pColor, eColor, x, y);
+     break;
+     case(king) :
+       if(!hasKingMoved && !check) {
+         return true;
+       }
+       return kingHandler(x, y);
+     break;
    }
-   return response;
+   return false;
 }
 
-function returnPawnIdentity () {
-  return 4;
+function pawnHandler() {
+  return false;
 }
 
-function pieceOnSquare(square) {
-  let response = false;
-  if($('.chess-game-container').find("." +square+".piece").length == 1);
 
+
+function checkKingSafety(pColor, eColor, pieceToMove, startingX, startingY, x, y) {
+  // iterate through all possible enemy movements
+  newShadow = positions;
+  // update shadow
+  for(var key in newShadow) {
+    var value = newShadow[key];
+    if (value == pieceToMove) {
+
+      // this is the piece that is going to move
+      for (var k = 0; k < value.length; k++) {
+        if(value[k][0] == startingX && value[k][1] == startingY) {
+          // this piece is the exact one that is going to move
+          value[k][0] = x;
+          value[k][1] = y;
+          
+        }
+      }
+    }
+    
+  }
+  let enemies = [];
+  let stringToTest = "";
+  let safe  = true;
+  let kingClass = $('.chess-game-container').find(".piece."+pColor+"-king").attr("class") + "";
+
+  $('.chess-game-container').children('.piece').each(function (item, index) {
+    stringToTest = $(this).attr("class") + "";
+    if (stringToTest.includes(eColor)) {
+      var piece = stringToTest.match(/(white|black)-[a-z]+/g) + "";
+      piece = piece.substring(piece.indexOf('-')+1);
+      var square = stringToTest.match(/[a-h][1-8]/g) + "";
+      splitSquare = square.split('');
+      var possiblex = columns.indexOf(splitSquare[0]);
+      var possibley = rows.indexOf(parseInt(splitSquare[1]));
+      enemies.push({"piece": piece, "x" : possiblex , "y" : possibley});
+      
+    }
+  }); 
+  
+  let index = 0;
+  while(safe) {
+    console.log("returning options for " + enemies[index]["piece"] +  " "  + enemies[index]["x"]);
+    enemyOptions = returnOptions(eColor, pColor, enemies[index]["piece"], enemies[index]["x"], enemies[index]["y"], "options")
+    if(enemyOptions.indexOf(columns[x]+rows[y]) != -1) {
+      console.log("king is not safe");
+      safe = false;
+      break;
+    }
+    index++;
+  }
+  
+  if(safe) {
+    console.log("king is safe");
+  }
+  
+  // to evaluate if king is safe check if any enemy pieces can attack
+  return safe;
+  
 }
 
-$("html").on("dragstart click", function(event) {
-    beginningX = event.clientX;
-    beginningY = event.clientY;
-});
+function canMoveToSquare(piece, pColor, eColor, x, y, tag) {
+  let checkForSafety = true;
+  if(tag != "options") {
+    checkForSafety = checkKingSafety(pColor, eColor, piece, x, y);
+  }
+  
+  // 1 is yes, 2 is no, 3 is attackable piece
+  let response = 1;
+  // check bounds
+  if (x < 0 || x > 7 || y < 0 || y > 7) {
+    response = 2;
+    return response;
+  }
+  // check if attackable piece
+  let classes = "";
+  if(tag == "options") {
+    for(var key in newShadow) {
+      var value = newShadow[key];
+      for (var k = 0; k < value.length; k++) {
+        if(value[k][0] == x && value[k][1] == y) {
+          // this piece is the destroyed one
+          console.log(key + " can be attacked ");
+          if (key.includes(pColor)) {
+            return false;
+          }
+          else {
+            return true;
+          }
+        }
+      }
+    }
+  }
+  else {
+   classes = $('.chess-game-container').find(".piece." + columns[x] + rows[y]).attr("class") + "";
+  }
+  
+  if (classes.includes(eColor)) {
+    $('.chess-game-container').append("<div class='square-attack " + columns[x] + rows[y] + "'></div>");    
+    return response;
+  }
+  // check if piece is player's own
+  else if (classes.includes(pColor)) {
+    response = 2;
+    return response;
+  }
+  return response;
+}
+
+
+function returnPawnIdentity(x, y) {
+  let identity = 100;
+  console.log("finding " + columns[x] + rows[y]);
+  let classes = $('.chess-game-container').find(".piece." + columns[x] + rows[y]).attr("class") + "";
+  let identityRegex = new RegExp(playercolor + "-[0-9]", "i");
+  let index = classes.search(identityRegex);
+  if(index != -1) {
+    console.log("identity is " + classes.charAt(index + playercolor.length + 1));
+    identity = parseInt(classes.charAt(index + playercolor.length + 1));
+  }
+  console.log("returning this identity " + identity);
+  return identity;
+}
+
+
 
 $("html").on("dragleave", function(event) {
     event.preventDefault();  
@@ -184,77 +357,6 @@ $("html").on("dragleave", function(event) {
     $(this).removeClass('dragging');
 });
 
-function returnNewSquare(elementHeight, elementWidth, endX, endY) {
-  let distanceX = endX - beginningX;
-  let distanceY = endY - beginningY;
-  let offsetX = Math.ceil(distanceX/elementWidth);
-  let offsetY = Math.ceil(distanceY/elementHeight);
-  
-  
-  let lastRow = parseInt( lastClicked[1]);
-  let nextClass = columns[(columns.indexOf(lastClicked[0]) + offsetX) % 8] + "" + rows[(lastRow + offsetY) % 8];
-  return nextClass;
-}
-$("html").click(function(e) {
-    let offset = $('.chess-game-container').offset();
-    let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
-    let rows = [8, 7, 6, 5, 4, 3, 2, 1];
-    let x = columns[ Math.ceil(( e.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
-    let y = rows[ Math.ceil((e.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
-   
-
-    //check a piece has been clicked
-    let options = returnOptions(pieceClicked, toMoveX, toMoveY);
-    if(actionBegun) {
-      if(options.indexOf(x+y+"") != -1) {
-        if(pieceClicked.includes("pawn")) {
-          pawnIdentities[returnPawnIdentity()] = 0;
-          console.log("setting index " + lastClicked + " to 0 " );
-        }
-        $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
-        $('.square').remove();
-        $('.square-attack').remove();
-        
-      }
-      else {
-        console.log("movement not authorized");
-      }
-      
-
-    }
-    // if a piece has been clicked, initiate action
-    else {
-
-    }
 
 
-    
-});
 
-
-$("html").on("drop", function(event) {
-    event.preventDefault();  
-    event.stopPropagation();
-
-    let offset = $('.chess-game-container').offset();
-    let columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']; // x
-    let rows = [8, 7, 6, 5, 4, 3, 2, 1];
-    let x = columns[ Math.ceil(( event.pageX - offset.left)/($('.chess-game-container').width()/8)) - 1];
-    let y = rows[ Math.ceil((event.pageY - offset.top)/($('.chess-game-container').height()/8)) - 1];
-
-
-    
-    let options = returnOptions(pieceClicked, toMoveX, toMoveY);
-    
-    if(options.indexOf(x+y+"") != -1) {
-      if(pieceClicked.includes("pawn")) {
-        pawnIdentities[returnPawnIdentity()] = 0;
-      }
-      $('.chess-game-container').find("." + lastClicked + ".piece").removeClass(lastClicked).addClass(x+y+"");
-      
-    }
-    else {
-      console.log("movement not authorized");
-    }
-    
-});

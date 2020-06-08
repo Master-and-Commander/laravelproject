@@ -20,6 +20,16 @@
     z-index: 500;
    
 }
+
+.hidden-square {
+    
+    width:45px;
+    height:45px;
+    z-index: 400;
+    opacity: 1;
+    position: absolute;
+}
+
 .black-knight {
     background-image: url(/images/black-knight.png);
 }
