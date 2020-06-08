@@ -14,7 +14,7 @@ class CreateSpidersTable extends Migration
     public function up()
     {
         Schema::create('spiders', function (Blueprint $table) {
-          $table->bigIncrements('scorpion_id');
+          $table->bigIncrements('spider_id');
           $table->string('species_name', 25);
           $table->string('family_name', 25);
           $table->string('description', 750);

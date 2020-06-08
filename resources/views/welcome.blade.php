@@ -18,6 +18,34 @@
 	<p> <span class="font-weight-bold"> Trolls exist! </span> asdfasdf </p> 	  
 	</div>
 
+    <h2> Articles </h2>
+	<hr />
+	<?php foreach ($articles as $article) : ?>
+		<div class = "col-md-4">
+			<div class="card-body">
+				<h5 class="card-title">{{$article[1]}}</h5>
+				<p class="card-text">{{$article[2]}}</p>
+				<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+			</div>
+	    <div>
+	<?php endforeach ?>
+	<button class="btn btn-secondary">More</button>
+	
+
+	<h2> Creatures </h2>
+	<hr />
+	<?php foreach ($creatures as $creature) : ?>
+		<p>{{$creature[1]}}<p>
+	<?php endforeach ?>
+
+	<h2> New Joiners </h2>
+	<hr />
+	<?php foreach ($buddies as $buddy) : ?>
+		<p>{{$buddy[1]}}<p>
+	<?php endforeach ?>
+	
+
+	<button class="btn btn-secondary">More</button>
 	
 	
 	<h2> Popular </h2>
