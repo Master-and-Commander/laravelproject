@@ -3,7 +3,6 @@ let sectionCounter = 0;
 let data = new Array();
 
 $(".togglebuildsteps").on("click change",function (e) {
-   
     let next = $(this).attr("setnext");
     let newprevious = $(this).closest(".buildobject").attr("step");
     // set the next step
@@ -86,13 +85,11 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
    
    if ( $(this).closest(".buildobject").find("." + ( $(this).closest(".buildobject").attr("step"))).hasClass("last-step") && ($(this).hasClass("arthropodiac-build-step-next"))) 
    {
-    console.log("this was the last step");
     lastStep = true;
     $("input").each(function(){
         inputClass = fetchStep("" + $(this).closest(".arthropodiac-build-step").attr("class"));
         entry = {class: inputClass, value: $(this).val(), id: $(this).attr("id") };
         data.push(entry);
-        console.log("entry " + entry);
  
     });
    }   
@@ -113,7 +110,6 @@ $(".arthropodiac-build-step-next, .arthropodiac-build-step-previous").click(func
     }
     if(lastStep) {
         submitForm();
-        window.location = "/";
     }
     else {
         $(this).closest(".buildobject").children(".arthropodiac-build-step").each(function(){
@@ -187,9 +183,9 @@ function editSection(sectionStep) {
 }
 
 function submitForm() {
-    var formData = {};
+    var formData = [];
     $(".buildobject").find("input[name]").each(function (index, node) {
-        formData[node.name] = node.value;
+        formData.push([node.name, node.value]);
     });
     $.ajaxSetup({
         headers: {
@@ -206,10 +202,11 @@ function submitForm() {
         },
         success: function(result){
             console.log('received ' + result['debug']);
+            //window.location = "/";
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
             console.log("textStatus: " + textStatus + " error: " + errorThrown + " etc: " + JSON.stringify(XMLHttpRequest));
+            //window.location = "/";
         }     
     });
-    console.log("submitting the form  " );
 }

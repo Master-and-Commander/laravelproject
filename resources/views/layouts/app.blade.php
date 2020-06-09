@@ -24,7 +24,7 @@
     <?php endif ?>
 
     <?php if(strpos($uri, 'build') !== false): ?>
-        <script src="{{ asset('js/buildAsset.js') }}" defer></script>
+        <script src="{{ asset('js/buildAsset.js')}}?v=1.1.2" defer></script>
         <link href="{{ asset('css/buildAsset.css') }}" rel="stylesheet">
     <?php endif ?>
 

@@ -13,36 +13,74 @@
 	 
 	<h1> Arthropodiac </h1>
 	<hr />
-	<div class="row">	
-	<img src = "images/scorpion3.png" class ="arthropodiac-logo-welcome" />
-	<p> <span class="font-weight-bold"> Trolls exist! </span> asdfasdf </p> 	  
-	</div>
+	
 
     <h2> Articles </h2>
 	<hr />
+	<div class= "row col-md-12">
 	<?php foreach ($articles as $article) : ?>
-		<div class = "col-md-4">
-			<div class="card-body">
-				<h5 class="card-title">{{$article[1]}}</h5>
-				<p class="card-text">{{$article[2]}}</p>
-				<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+		<div class = "card-row">
+		  <div class="card">
+				<div class="card-body">
+					<h5 class="card-title">{{$article[1]}}</h5>
+					<hr class ="hr-card"/>
+					<p class="card-text">{{$article[2]}}</p>
+					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+				</div>
 			</div>
-	    <div>
+		</div>
+		<div class = "card-row">
+		<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Filler article</h5>
+					<hr class ="hr-card"/>
+					<p class="card-text">Filler content</p>
+					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+				</div>
+		  </div>
+	    </div>
 	<?php endforeach ?>
+	</div>
+
+	
 	<button class="btn btn-secondary">More</button>
 	
 
 	<h2> Creatures </h2>
 	<hr />
+	<div class= "row col-md-12">
 	<?php foreach ($creatures as $creature) : ?>
-		<p>{{$creature[1]}}<p>
+		<div class = "card-row">
+		<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Filler article</h5>
+					<hr class ="hr-card"/>
+					<p class="card-text">Filler content</p>
+					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+				</div>
+		  </div>
+	    </div>
 	<?php endforeach ?>
+	</div>
+
+	<button class="btn btn-secondary">More</button>
 
 	<h2> New Joiners </h2>
 	<hr />
+    <div class= "row col-md-12">
 	<?php foreach ($buddies as $buddy) : ?>
-		<p>{{$buddy[1]}}<p>
+		<div class = "card-row">
+		<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Filler article</h5>
+					<hr class ="hr-card"/>
+					<p class="card-text">Filler content</p>
+					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+				</div>
+		  </div>
+	    </div>
 	<?php endforeach ?>
+	</div>
 	
 
 	<button class="btn btn-secondary">More</button>

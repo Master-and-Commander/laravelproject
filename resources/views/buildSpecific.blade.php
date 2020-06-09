@@ -74,15 +74,15 @@
 
                 <div class="form-group arthropodiac-required" mode="fill">
                     <label for="family-name">Family Name</label>
-                    <input type="text" class="form-control" id="family-name" placeholder="arachnus deathicus">
+                    <input type="text" class="form-control" id="family-name" name = "arthropod_family_name" placeholder="arachnus deathicus">
                 </div>
                 <div class="form-group arthropodiac-required" mode="amount">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" amount="500" id="description" placeholder="arachnus deathicus">
+                    <input type="text" class="form-control" amount="500" id="description"  name = "arthropod_species_description" placeholder="arachnus deathicus">
                 </div>
                 <div class="form-group arthropodiac-required" mode="fill">
                     <label for="habitat">Habitat</label>
-                    <input type="text" class="form-control" id="habitat" placeholder="arachnus deathicus">
+                    <input type="text" class="form-control" id="habitat" name = "arthropod_species_habitat" placeholder="arachnus deathicus">
                 </div>
                 <div class="form-group arthropodiac-required" mode="fill">
                     <label for="size">Size</label>
@@ -90,7 +90,7 @@
                 </div>
 
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-4" ready="false" style="display: none" next="arthropodiac-step-5" previous="arthropodiac-step-3">
+            <div class="arthropodiac-build-step arthropodiac-step-4" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-3">
                 <h2>Scorpion or Spider data 2</h2>
                 <div class="form-group arthropodiac-required" mode="fill">
                     <label for="toxicity">latin name</label>
@@ -107,7 +107,7 @@
             <div class="arthropodiac-build-step arthropodiac-step-5" ready="false" style="display: none" next="arthropodiac-step-6" previous="arthropodiac-step-4">
                 <h2>pet data</h2>
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-6" ready="false" style="display: none" next="arthropodiac-step-7" previous="arthropodiac-step-5">
+            <div class="arthropodiac-build-step arthropodiac-step-6" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-5">
                 <h2>Would you like to add information about your enclosure?</h2>
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-7" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-6">

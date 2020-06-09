@@ -32,10 +32,14 @@ class AjaxController extends Controller
 
     public function buildSpecific(Request $request) {
         $article = $request->input('article');
+        $formData = $request->input('data');
         $debug = "";
         $newArticle = new Article;
         
         $id = "";
+
+        // if article exists insert article
+        if( $request->input('data') == "article")
         foreach($article as $input) {
             if($input['type'] == "title") {
                 $newArticle->title = $input['header'];
@@ -43,7 +47,7 @@ class AjaxController extends Controller
                 $newArticle->save();
                 $id = $newArticle->id;
             }
-            else {
+            else if ($input['type'] == "section") {
                 $newContent = new ArticleContent;
                 $newContent->article_id = $id;
                 $newContent->header = $input['header'];
@@ -51,8 +55,12 @@ class AjaxController extends Controller
                 $newContent->step = $input['counter'];
                 $newContent->save();
             }
-            $debug .= $input['content'];
         }
+        
+        foreach($formData as $entry) {
+            $debug .=  $entry[0] . "  and " . $entry[1];
+        }
+
         return response()->json([
             'debug'=>$debug
             ]);
