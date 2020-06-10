@@ -74,9 +74,9 @@
 
                 <div class="form-group arthropodiac-required" mode="fill">
                     <label for="family-name">Family Name</label>
-                    <input type="text" class="form-control" id="family-name" name = "arthropod_family_name" placeholder="arachnus deathicus">
+                    <input type="text" class="form-control" id="family-name" name = "arthropod_species_family_name" placeholder="arachnus deathicus">
                 </div>
-                <div class="form-group arthropodiac-required" mode="amount">
+                <div class="form-group arthropodiac-required" mode="fill">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" amount="500" id="description"  name = "arthropod_species_description" placeholder="arachnus deathicus">
                 </div>
@@ -84,25 +84,25 @@
                     <label for="habitat">Habitat</label>
                     <input type="text" class="form-control" id="habitat" name = "arthropod_species_habitat" placeholder="arachnus deathicus">
                 </div>
-                <div class="form-group arthropodiac-required" mode="fill">
+                <div class="form-group arthropodiac-required" mode="amount">
                     <label for="size">Size</label>
-                    <input type="text" class="form-control" id="size" placeholder="arachnus deathicus">
+                    <input type="text" class="form-control" id="size" name = "arthropod_species_size" placeholder="arachnus deathicus">
                 </div>
 
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-4" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-3">
                 <h2>Scorpion or Spider data 2</h2>
-                <div class="form-group arthropodiac-required" mode="fill">
-                    <label for="toxicity">latin name</label>
-                    <input type="text" class="form-control" id="toxicity" placeholder="arachnus deathicus">
+                <div class="form-group arthropodiac-required" mode="amount">
+                    <label for="toxicity">Toxicity</label>
+                    <input type="text" class="form-control" id="toxicity" name="arthropod_species_toxicity" placeholder="arachnus deathicus">
                 </div>
-
-                <div>
-                </div>
-                <div class="form-group arthropodiac-required" mode="fill">
-                    <label for="cannibalistic, burrower, climber">latin name</label>
-                    <input type="text" class="form-control" id="cannibalistic" placeholder="arachnus deathicus">
-                </div>
+                <input type="checkbox" id="arthropod_species_cannibalistic" name="arthropod_species_cannibalistic" value="cannibalistic">
+                <label for="arthropod_species_cannibalistic"> Cannibalistic </label><br>
+                <input type="checkbox" id="arthropod_species_burrower" name="arthropod_species_burrower" value="burrower">
+                <label for="arthropod_species_burrower"> Burrower </label><br>
+                <input type="checkbox" id="arthropod_species_climber" name="arthropod_species_climber" value="climber">
+                <label for="arthropod_species_climber"> Climber </label><br> 
+                
             </div>
             <div class="arthropodiac-build-step arthropodiac-step-5" ready="false" style="display: none" next="arthropodiac-step-6" previous="arthropodiac-step-4">
                 <h2>pet data</h2>

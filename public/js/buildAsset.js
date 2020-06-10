@@ -35,6 +35,9 @@ $(".arthropodiac-required").on("click change", function(e) {
               }
             break;
             case("amount") :
+            if ($(this).find("input").val().length < 5) {
+                disable = false;
+            }
             break;
             case("database") :
             break;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use App\ArticleContent;
+use App\Scorpion;
 
 class AjaxController extends Controller
 {
@@ -35,6 +36,7 @@ class AjaxController extends Controller
         $formData = $request->input('data');
         $debug = "";
         $newArticle = new Article;
+        $newScorpion = new Scorpion;
         
         $id = "";
 
@@ -56,10 +58,15 @@ class AjaxController extends Controller
                 $newContent->save();
             }
         }
-        
+        $species_data = array();
+
         foreach($formData as $entry) {
-            $debug .=  $entry[0] . "  and " . $entry[1];
+            if(substr_count($entry[0], "arthropod_species") != 0) {
+                $species_data[] = [$entry[0], $entry[1] ];
+                $debug .= "Pushing " . $entry[0] . "  and " . $entry[1];
+            }
         }
+
 
         return response()->json([
             'debug'=>$debug
