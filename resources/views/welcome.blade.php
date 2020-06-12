@@ -25,20 +25,10 @@
 					<h5 class="card-title">{{$article[1]}}</h5>
 					<hr class ="hr-card"/>
 					<p class="card-text">{{$article[2]}}</p>
-					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
+					<a href="/article/{{$article[0]}}" class="btn btn-primary">Keep Reading</a>
 				</div>
 			</div>
 		</div>
-		<div class = "card-row">
-		<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Filler article</h5>
-					<hr class ="hr-card"/>
-					<p class="card-text">Filler content</p>
-					<a href="/creatures/scorpion/" class="btn btn-primary">Keep Reading</a>
-				</div>
-		  </div>
-	    </div>
 	<?php endforeach ?>
 	</div>
 
