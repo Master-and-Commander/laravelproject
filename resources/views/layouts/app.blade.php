@@ -46,7 +46,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img src = "/images/scorpion3.png" class="arthropodiac-icon-home" />
+                <a href ="{{ url('/') }}"><img src = "/images/scorpion3.png" class="arthropodiac-icon-home" /></a>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Arthropodiac
                 </a>
