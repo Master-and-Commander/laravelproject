@@ -27,12 +27,13 @@ $("input").on("click", function(e) {
     }
 
 });
-function databaseHandler(command) {
+function databaseHandler(command, inputstring) {
    switch(command) {
        case("species-name"):
+       checkForLatinNames(inputstring);
 
        // check with database and fetch results
-       $(".arthropod-species-select:nth-child(3)").html("lookee here!");
+      
        break;
    }
 }
@@ -69,7 +70,7 @@ $(".arthropodiac-required").on("click change", function(e) {
             case("database") :
              if($(this).find("input").attr("id")== "species-name") {
                  console.log("Options to be updated");
-                 databaseHandler("species-name");
+                 databaseHandler("species-name", $("#species-name").val());
              }
              else {
                  console.log("Something was not found");
@@ -236,6 +237,8 @@ function checkForLatinNames(inputstring) {
         },
         success: function(result){
             console.log('received ' + result['debug']);
+            $(".arthropod-species-select").html(result['options']);
+
             //window.location = "/";
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 

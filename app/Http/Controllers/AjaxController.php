@@ -34,6 +34,10 @@ class AjaxController extends Controller
 
     public function getLatinNames(Request $request) {
         $name = $request->input('entry');
+        return response()->json([
+            'debug'=>"debugging " . $name,
+            'options'=>"<p>here's a paragraph</p>"
+            ]);
     }
 
     public function buildSpecific(Request $request) {
@@ -114,7 +118,7 @@ class AjaxController extends Controller
        switch($entryname) {
            case("arthropod_species_family_name"):
             $scorpion->family_name = $entrydata;
-            return $scorpion
+            return $scorpion;
            case("arthropod_species_description"):
             $scorpion->description = $entrydata;
             return $scorpion;
@@ -126,7 +130,7 @@ class AjaxController extends Controller
             return $scorpion;
            case("arthropod_species_toxicity"):
             $scorpion->toxicity = $entrydata;
-            return $scorpion
+            return $scorpion;
            case("arthropod_species_cannibalistic"):
             $scorpion->canibalistic = $entrydata;
             return $scorpion;
@@ -146,7 +150,7 @@ class AjaxController extends Controller
         switch($entryname) {
             case("arthropod_species_family_name"):
              $scorpion->family_name = $entrydata;
-             return $scorpion
+             return $scorpion;
             break;
         }
     }
