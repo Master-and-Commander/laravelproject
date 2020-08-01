@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use App\Article;
 use App\ArticleContent;
 use App\Scorpion;
-
+use App\Spider;
+// has not recently been tested to be working
 class AjaxController extends Controller
 {
 
@@ -37,10 +38,14 @@ class AjaxController extends Controller
         $debug = "";
         $newArticle = new Article;
         $newScorpion = new Scorpion;
+
+        // need to know if it's a scorpion or a spider
+        // will need a table with scorpion families
+        // recognized family table (family name, arthropod type ["spider", "scorpion"], description)
         
         $id = "";
 
-        // if article exists insert article
+        // if article exists insert article // currently working
         if( $request->input('data') == "article")
         foreach($article as $input) {
             if($input['type'] == "title") {
@@ -59,18 +64,89 @@ class AjaxController extends Controller
             }
         }
         $species_data = array();
-
+        $typeOfArachnid = returnTypeName($formData);
+        
         foreach($formData as $entry) {
-            if(substr_count($entry[0], "arthropod_species") != 0) {
-                $species_data[] = [$entry[0], $entry[1] ];
-                $debug .= "Pushing " . $entry[0] . "  and " . $entry[1];
+            if($typeOfArachnid == "scorpion") {
+                $debug .= "Scorpion: ";
+                $newScorpion = scorpionDataHandler($newScorpion, $entry[0], $entry[1] );
+                $debug .= "Name - " . $entry[0] . "  Value - " . $entry[1] . "\n ";
+            }
+            else if ($typeOfArachnid == "spider") {
+                $debug .= "Spider: ";
+                $newSpider = spiderDataHandler($newSpider, $entry[0], $entry[1] );
+                $debug .= "Name - " . $entry[0] . "  Value - " . $entry[1] . "\n ";
             }
         }
 
+        // re-iterate through fetched data
 
+        
         return response()->json([
             'debug'=>$debug
             ]);
     }
+
+
+    // currently not doing its job
+    // perhaps best to ask question, but this shouldn't be necessary
+    public function returnTypeName($data) {
+        $familyname = array();
+        foreach($formData as $entry) {
+            if( $entry[0] == "arthropod_species_family_name") {
+                $familyname = split(" ", $entry[1]);
+                $debug .= "Name - " . $entry[0] . "  Value - " . $entry[1] . "\n ";
+            break;
+            }
+        }
+        
+        // fetch $data
+        $recognizedScorpions = array();
+        $recognizedSpiders = array();
+        return "scorpion";
+    }
+
+    public function scorpionDataHandler( Scorpion $scorpion, $entryname, $entrydata) {
+       switch($entryname) {
+           case("arthropod_species_family_name"):
+            $scorpion->family_name = $entrydata;
+            return $scorpion
+           case("arthropod_species_description"):
+            $scorpion->description = $entrydata;
+            return $scorpion;
+           case("arthropod_species_habitat"):
+            $scorpion->habitat = $entrydata;
+            return $scorpion;
+           case("arthropod_species_size"):
+            $scorpion->size = $entrydata;
+            return $scorpion;
+           case("arthropod_species_toxicity"):
+            $scorpion->toxicity = $entrydata;
+            return $scorpion
+           case("arthropod_species_cannibalistic"):
+            $scorpion->canibalistic = $entrydata;
+            return $scorpion;
+           case("arthropod_species_burrower"):
+            $scorpion->burrower = $entrydata;
+            return $scorpion;
+           case("arthropod_species_climber"):
+            $scorpion->climber = $entrydata;
+            return $scorpion;
+           
+       }
+
+
+    }
+
+    public function spiderDataHandler(Spider $spider, $entryname, $entrydata) {
+        switch($entryname) {
+            case("arthropod_species_family_name"):
+             $scorpion->family_name = $entrydata;
+             return $scorpion
+            break;
+        }
+    }
     
 }
+
+   
