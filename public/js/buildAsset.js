@@ -12,6 +12,31 @@ $(".togglebuildsteps").on("click change",function (e) {
     $(this).closest(".buildobject").find("." + next).attr("previous", newprevious);
     
 });
+
+// change value of checkbox so receiving end can tell if box has been clicked
+$("input").on("click", function(e) {
+
+    if ($(this).attr("type") == "checkbox") {
+        console.log("this is a checkbox");
+        if ( $(this).attr("value") == "none") {
+            $(this).attr("value", "clicked");
+        }
+        else {
+            $(this).attr("value", "none");
+        }
+    }
+
+});
+function databaseHandler(command) {
+   switch(command) {
+       case("species-name"):
+
+       // check with database and fetch results
+       $(".arthropod-species-select:nth-child(3)").html("lookee here!");
+       break;
+   }
+}
+
 $(".arthropodiac-required").on("click change", function(e) {
     // check if required fields are finished before un - disabling
     let current = $(this).closest(".buildobject").attr("step");
@@ -34,12 +59,22 @@ $(".arthropodiac-required").on("click change", function(e) {
                   disable = false;
               }
             break;
+            // amount is to be an integer that can be as low as 0
             case("amount") :
-            if ($(this).find("input").val().length < 5) {
+            if ($(this).find("input").val().length == 0) {
                 disable = false;
             }
             break;
+            // requires use of a database (like checking if a name has already been chosen)
             case("database") :
+             if($(this).find("input").attr("id")== "species-name") {
+                 console.log("Options to be updated");
+                 databaseHandler("species-name");
+             }
+             else {
+                 console.log("Something was not found");
+             }
+
             break;
             case("article") :
               if(article.length < 3) {
@@ -64,6 +99,7 @@ $(".arthropodiac-required").on("click change", function(e) {
     }
 
 });
+
 
 function fetchStep(classString) {
    var startingIndex = classString.search('arthropodiac-step-');
@@ -183,6 +219,30 @@ function editSection(sectionStep) {
       $("#section-header").val(article[sectionStep].header);
       $("#section-content").val(article[sectionStep].content);
   }
+}
+
+
+function checkForLatinNames(inputstring) {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: "/ajax/getlatin",
+        method: 'post',
+        data: {
+           entry: inputstring
+        },
+        success: function(result){
+            console.log('received ' + result['debug']);
+            //window.location = "/";
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.log("textStatus: " + textStatus + " error: " + errorThrown + " etc: " + JSON.stringify(XMLHttpRequest));
+            //window.location = "/";
+        }     
+    });
 }
 
 function submitForm() {

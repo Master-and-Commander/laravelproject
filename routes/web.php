@@ -17,6 +17,7 @@ Route::get('/creatures/{type}/{id}', ['uses' => 'CreatureController@generateType
 //ajax functions
 Route::post('/ajax/carousel', 'AjaxController@carouselHandler');
 Route::post('/ajax/buildspecific', 'AjaxController@buildSpecific');
+Route::post('/ajax/getlatin', 'AjaxController@getLatinNames');
 
 Route::get('/search/{search}', ['uses' => 'SearchController@search']);
 Route::get('/build/{flavor}', ['uses' => 'BuildController@build']);

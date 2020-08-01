@@ -32,6 +32,10 @@ class AjaxController extends Controller
             ]);
     }
 
+    public function getLatinNames(Request $request) {
+        $name = $request->input('entry');
+    }
+
     public function buildSpecific(Request $request) {
         $article = $request->input('article');
         $formData = $request->input('data');
