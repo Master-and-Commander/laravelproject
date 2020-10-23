@@ -15,10 +15,9 @@ class CreateGeneralInformationTable extends Migration
     {
         Schema::create('general_information', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->string('creature_type', 25);
-          $table->string('info_type', 25);
-          $table->string('entry');
-          $table->string('entry_extra');
+          $table->string('for_page', 50);
+          $table->string('identifier', 25);
+          $table->string('message');
           $table->timestamps();
         });
     }

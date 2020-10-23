@@ -10,8 +10,6 @@ Route::get('/home', function () {
 
 // General routes
 Route::get('/', ['uses' => 'WelcomeController@generateMain']);
-Route::get('/creatures/{type}', ['uses' => 'CreatureController@generateMainArticle']);
-Route::get('/creatures/{type}/{id}', ['uses' => 'CreatureController@generateTypeArticle']);
 
 
 //ajax functions
@@ -20,7 +18,7 @@ Route::post('/ajax/buildspecific', 'AjaxController@buildSpecific');
 Route::post('/ajax/getlatin', 'AjaxController@getLatinNames');
 
 Route::get('/search/{search}', ['uses' => 'SearchController@search']);
-Route::get('/build/{flavor}', ['uses' => 'BuildController@build']);
+Route::get('/admin/build', ['uses' => 'BuildController@build']);
 Route::get('/article/{id}', ['uses' => 'ArticleController@generateArticle'] );
 
 Route::get('/setup', ['uses' => 'SetupController@showGeneral']);
@@ -36,15 +34,10 @@ Route::get('/editprofile', ['uses' => 'UserController@showGeneral']);
 //Fields: user_id, Name, description
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 
-//* Buddy Routing
-
 // Fields: species_id, latin_name, common_names, description,  
-Route::get('/spider/{spider}', ['uses' => 'SpiderController@showBuddy']);
-Route::get('/scorpion/{scorpion}', ['uses' => 'ScorpionController@showBuddy']);
+Route::get('/plant/{plant}', ['uses' => 'PlantController@generatePlant']);
+Route::get('/fish/{fish}', ['uses' => 'FishController@generateFish']);
 
-// Fields: Buddy_id, species_id, user_id, description
-Route::get('/myspider/{spider}', ['uses' => 'SpiderController@showSpecific']);
-Route::get('/myscorpion/{scorpion}', ['uses' => 'ScorpionController@showSpecific']);
 
 
 

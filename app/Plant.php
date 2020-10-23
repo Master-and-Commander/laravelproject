@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Scorpion extends Model
+class Plant extends Model
 {
     //
-    protected $primaryKey = 'scorpion_id';
+    protected $primaryKey = 'plant_id';
 
 
 }

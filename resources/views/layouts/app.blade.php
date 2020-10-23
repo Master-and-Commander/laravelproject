@@ -46,11 +46,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a href ="{{ url('/') }}"><img src = "/images/scorpion3.png" class="arthropodiac-icon-home" /></a>
+               
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Arthropodiac
+                    Lagoon Suppliers, Inc.
                 </a>
-                <a class = "arthropodiac-home" href="{{ url('/home') }}">Home</a>
+               
                 
                 <ul class="navbar-nav ml-auto">
                 
@@ -69,10 +69,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/games') }}">Games</a>
+                        <a class="nav-link" href="{{ url('/games') }}">Fish</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/forums') }}">Forums</a>
+                        <a class="nav-link" href="{{ url('/forums') }}">Plants</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/forums') }}">Learn More</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest

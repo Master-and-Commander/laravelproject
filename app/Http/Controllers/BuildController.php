@@ -10,10 +10,10 @@ class BuildController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    
-    public function build($build)
+    // with focus simply on my own fish and plants (not for sale for now), Not sure this is needed
+
+    public function build()
     {
-      $data['build'] = $build;
-      return view('buildSpecific',$data);
+      return view('buildSpecific');
     }
 }

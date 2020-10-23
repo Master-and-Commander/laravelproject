@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScorpionsTable extends Migration
+class CreateFishTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class CreateScorpionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('scorpions', function (Blueprint $table) {
-          $table->bigIncrements('scorpion_id');
+        Schema::create('fish', function (Blueprint $table) {
+          $table->bigIncrements('fish_id');
           $table->string('species_name', 25);
           $table->string('family_name', 25);
           $table->string('description', 750);
+          $table->string('common_name', 25);
           $table->string('habitat', 25);
-          $table->integer('toxicity');
-          $table->integer('size');
-          $table->boolean('canabilistic');
-          $table->boolean('burrower');
-          $table->boolean('climber');
-          $table->integer('humidity');
+          $table->integer('pH');
+          $table->integer('oxygen');
+          $table->string('temperature',25);
+          $table->string('water_type',25);
+          $table->string('food_type',25);
+          $table->string('harvest_size', 25);
           $table->timestamps();
         });
     }
@@ -36,6 +37,7 @@ class CreateScorpionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scorpions');
+        Schema::dropIfExists('fishes');
+        Schema::dropIfExists('fish');
     }
 }

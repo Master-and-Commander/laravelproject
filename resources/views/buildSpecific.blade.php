@@ -16,102 +16,9 @@
     <div class="container buildobjectform">
         <form class="buildobject" step="arthropodiac-step-1">
 
-            <div class="arthropodiac-build-step arthropodiac-step-1" ready="false" style="display: block" next="arthropodiac-step-2">
-
-                <h2>What are you adding today?</h2>
-                <div class="arthropodiac-required" mode="check">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input togglebuildsteps" setnext="arthropodiac-step-2" id="arthropod" name="addingoptions">
-                        <label class="custom-control-label" for="arthropod">Arthropod</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input togglebuildsteps" setnext="arthropodiac-step-7" id="article" name="addingoptions">
-                        <label class="custom-control-label" for="article">Article</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input togglebuildsteps" setnext="arthropodiac-step-6" id="setup" name="addingoptions">
-                        <label class="custom-control-label" for="setup">Setup</label>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-2" ready="false" style="display: none" next="arthropodiac-step-3" previous="arthropodiac-step-1">
-                <h2>Please enter the latin name of your species.</h2>
-
-                <div class="form-group arthropodiac-required" mode="database">
-                    <label for="species-name">latin name</label>
-                    <input type="text" class="form-control " id="species-name" placeholder="Leiurus quinquestriatus">
-                </div>
-
-                <ul class="list-group arthropod-species-select">
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-
-
-                <h2>Do you wish to edit a species or a pet?</h2>
-                <div class="arthropodiac-required" mode="check">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input togglebuildsteps" setnext="arthropodiac-step-3" id="editspecies" name="arthropodtype">
-                        <label class="custom-control-label" for="editspecies">Add or Edit Species</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input togglebuildsteps" setnext="arthropodiac-step-5" id="pet" name="arthropodtype">
-                        <label class="custom-control-label" for="pet">Add or Edit Pet</label>
-                    </div>
-                </div>
-
-
-
-
-                <p class="species-response"></p>
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-3" ready="false" style="display: none" next="arthropodiac-step-4" previous="arthropodiac-step-2">
-                <h2>Scorpion or Spider data</h2>
-
-                <div class="form-group arthropodiac-required" mode="fill">
-                    <label for="family-name">Family Name</label>
-                    <input type="text" class="form-control" id="family-name" name = "arthropod_species_family_name" placeholder="Buthidae">
-                </div>
-                <div class="form-group arthropodiac-required" mode="fill">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" amount="500" id="description"  name = "arthropod_species_description" placeholder="Also known as the Deathstalker">
-                </div>
-                <div class="form-group arthropodiac-required" mode="fill">
-                    <label for="habitat">Habitat</label>
-                    <input type="text" class="form-control" id="habitat" name = "arthropod_species_habitat" placeholder="desert">
-                </div>
-                <div class="form-group arthropodiac-required" mode="amount">
-                    <label for="size">Size (mm)</label>
-                    <input type="text" class="form-control" id="size" name = "arthropod_species_size" placeholder="5">
-                </div>
-
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-4" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-3">
-                <h2>Scorpion or Spider data 2</h2>
-                <div class="form-group arthropodiac-required" mode="amount">
-                    <label for="toxicity">Toxicity</label>
-                    <input  type="range" min="1" max="5" step="1" name="rating" class="form-control" id="toxicity" name="arthropod_species_toxicity">
-                    
-                </div>
-                <input type="checkbox" id="arthropod_species_cannibalistic" name="arthropod_species_cannibalistic" value="none">
-                <label for="arthropod_species_cannibalistic"> Cannibalistic </label><br>
-                <input type="checkbox" id="arthropod_species_burrower" name="arthropod_species_burrower" value="none">
-                <label for="arthropod_species_burrower"> Burrower </label><br>
-                <input type="checkbox" id="arthropod_species_climber" name="arthropod_species_climber" value="none">
-                <label for="arthropod_species_climber"> Climber </label><br> 
-                
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-5" ready="false" style="display: none" next="arthropodiac-step-6" previous="arthropodiac-step-4">
-                <h2>pet data</h2>
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-6" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-5">
-                <h2>Would you like to add information about your enclosure?</h2>
-            </div>
-            <div class="arthropodiac-build-step arthropodiac-step-7" ready="false" style="display: none" next="arthropodiac-step-8" previous="arthropodiac-step-6">
+           
+            
+            <div class="arthropodiac-build-step arthropodiac-step-1" ready="false" style="display: none" next="arthropodiac-step-2">
                 <h2>Article</h2>
                 <br />
                 <div class="row arthropodiac-required" mode="article"> 
@@ -146,7 +53,7 @@
                 <button type="button" class="btn btn-secondary article-builder">Add</button>
             </div>
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-8" ready="true" style="display: none" next="arthropodiac-step-9" previous="arthropodiac-step-7">
+            <div class="arthropodiac-build-step arthropodiac-step-2" ready="true" style="display: none" next="arthropodiac-step-3" previous="arthropodiac-step-1">
                 <h2>Photos/ Resources to share?</h2>
                 <div class="resource-links">
                     <div class="form-group">
@@ -162,7 +69,7 @@
                 <input multiple id="pictures_upload" name="pictures[]" type="file">
 
             </div>
-            <div class="arthropodiac-build-step arthropodiac-step-9 last-step" ready="true" style="display: none" next="arthropodiac-step-10" previous="arthropodiac-step-8">
+            <div class="arthropodiac-build-step arthropodiac-step-3 last-step" ready="true" style="display: none" next="arthropodiac-step-4" previous="arthropodiac-step-2">
                 <h2>would you like to share?</h2>
             </div>
             <hr />
