@@ -38,6 +38,10 @@ Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/plant/{plant}', ['uses' => 'PlantController@generatePlant']);
 Route::get('/fish/{fish}', ['uses' => 'FishController@generateFish']);
 
+// Fish and Plants all
+
+Route::get('/fish', ['uses' => 'FishController@general']);
+
 
 
 

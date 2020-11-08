@@ -69,13 +69,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/games') }}">Fish</a>
+                        <a class="nav-link" href="{{ url('/fish') }}">Fish</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="{{ url('/forums') }}">Plants</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/forums') }}">Learn More</a>
+                        <a class="nav-link" href="{{ url('/games') }}">Learn More</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
