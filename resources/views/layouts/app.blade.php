@@ -72,7 +72,7 @@
                         <a class="nav-link" href="{{ url('/fish') }}">Fish</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/forums') }}">Plants</a>
+                        <a class="nav-link" href="{{ url('/plants') }}">Plants</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="{{ url('/games') }}">Learn More</a>

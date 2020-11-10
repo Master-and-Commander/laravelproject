@@ -35,12 +35,13 @@ Route::get('/editprofile', ['uses' => 'UserController@showGeneral']);
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 
 // Fields: species_id, latin_name, common_names, description,  
-Route::get('/plant/{plant}', ['uses' => 'PlantController@generatePlant']);
+Route::get('/plants/{plant}', ['uses' => 'PlantController@generatePlant']);
 Route::get('/fish/{fish}', ['uses' => 'FishController@generateFish']);
 
 // Fish and Plants all
 
 Route::get('/fish', ['uses' => 'FishController@general']);
+Route::get('/plants', ['uses' => 'PlantController@general']);
 
 
 

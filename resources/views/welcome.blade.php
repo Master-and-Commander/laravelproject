@@ -61,7 +61,7 @@
 					<h5 class="card-title">Filler article</h5>
 					<hr class ="hr-card"/>
 					<p class="card-text">Filler content</p>
-					<a href="/plant/{{$plant[0]}}" class="btn btn-primary">Keep Reading</a>
+					<a href="/plants/{{$plant[0]}}" class="btn btn-primary">Keep Reading</a>
 				</div>
 		  </div>
 	    </div>
