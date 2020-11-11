@@ -12,6 +12,11 @@
 			
 	 
 	<h1> About </h1>
+	<?php foreach ($generals as $general):  ?>
+		<?php if ($general[0] == "about") : ?>
+	<p>{{$general[1]}}</p>
+	 <?php endif ?>
+	<?php endforeach ?>
 	<hr />
 	
 	<h2> New Articles </h2>
