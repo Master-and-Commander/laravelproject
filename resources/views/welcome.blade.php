@@ -54,7 +54,7 @@
 
 	<br />
 	<button class="btn btn-secondary">More</button>
-	
+	<br />
 
 	<h2> On Plants </h2>
 	<hr />
@@ -63,9 +63,9 @@
 		<div class = "card-row">
 		<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">Filler article</h5>
+					<h5 class="card-title">{{$plant[1]}}</h5>
 					<hr class ="hr-card"/>
-					<p class="card-text">Filler content</p>
+					<p class="card-text">{{$plant[2]}}</p>
 					<a href="/plants/{{$plant[0]}}" class="btn btn-primary">Keep Reading</a>
 				</div>
 		  </div>
