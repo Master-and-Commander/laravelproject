@@ -16,8 +16,13 @@ class FishController extends Controller
 
     public function generateFish($name) {        
         // pass content to view
-        $entry = Fish::where('species_name', '=', str_replace("_", " ", $name))->first();
+        $entry = Fish::where('species_name', '=', $name)->first();
         $data['name'] = str_replace("_", " ", $name);
+        $data['fishdata'] = array();
+        $temp = array(0 => $entry['species_name'], 1 => $entry['family_name'], 2 => $entry['description'], 3 => $entry['common_name'], 4 => $entry['habitat']
+    ,  5 => $entry['pH'],  6 => $entry['oxygen'],  7 => $entry['temperature'],  8 => $entry['water_type']);
+        array_push($data['fishdata'], $temp);
+        $data['pH'] = $entry['pH'];
         return view("fish", $data);
     }
 
