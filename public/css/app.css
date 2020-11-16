@@ -12,6 +12,21 @@
     background-image: radial-gradient(#004d00 ,#005500);
   }
 
+  .fish_blurb {
+    border-radius: 25px;
+    background: 	#696969;
+    width: 40em;
+    padding: 1em;
+    height: 12em; 
+    color:white;
+  }
+  .latin {
+    font-style: italic;
+  }
+  .fish_blurb_attribute {
+    font-weight: bold
+  }
+
  .scorpion, .scorpion:hover {
    color:yellow;
    
