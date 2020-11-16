@@ -19,8 +19,17 @@ class PlantController extends Controller
     public function generatePlant($name) {
         
         // pass content to view
+        // str_replace("_", " ", $name)
         $entry = Plant::where('species_name', '=', str_replace("_", " ", $name))->first();
         $data['name'] = str_replace("_", " ", $name);
+        $data['common_name'] = $entry['common_name'];
+        $data['species_name'] = $entry['species_name'];
+        $data['family_name'] = $entry['family_name'];
+        $data['habitat'] = $entry['habitat'];
+        $data['humidity'] = $entry['humidity'];
+        $data['pH'] = 6;
+        $data['description'] = $entry['description'];
+
         return view("plant", $data);
 
     }

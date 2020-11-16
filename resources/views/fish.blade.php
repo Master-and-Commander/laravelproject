@@ -17,8 +17,8 @@
     </div>
     <div class = "col-md-6">
     <div class="row"><p><span class="fish_blurb_attribute">Water:</span> {{$water_type}}</p></div>
-    <div class="row"><p><span class="fish_blurb_attribute">Feed type:</span> carnivorous</p></div>
-    <div class="row"><p><span class="fish_blurb_attribute">Adult size:</span> 16cm</p></div>
+    <div class="row"><p><span class="fish_blurb_attribute">Feed type:</span> {{$food_type}}</p></div>
+    <div class="row"><p><span class="fish_blurb_attribute">Harvest weight:</span> {{$harvest_size}}</p></div>
     <div class="row"><p><span class="fish_blurb_attribute">Also known as:</span> Flatfish</p></div>
     </div>
     

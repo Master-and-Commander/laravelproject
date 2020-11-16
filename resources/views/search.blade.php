@@ -2,19 +2,13 @@
 
 @section('content')
 
-  <div class="row">
-    <a class="btn btn-primary"> Advanced </a>
-    
-  </div>
+<div class="container">
+  <h1>Search results for '{{$search}}' </h1>
+  <hr />
+
   
-
-  <h2>Basic Facts</h2>
- 
-
-  <h2>Common Questions</h2>
- 
-
-  <h2>Resources</h2>
+</div>
+  
   
 
 

@@ -30,12 +30,15 @@ class WelcomeController extends Controller
 
         foreach ($generalEntries as $entry) {
             $temp = array(0 => $entry['identifier'], 1 => $entry['message']);
+            if($entry['identifier'] == "about") {
+                $data['about'] = $entry['message'];
+            }
             array_push($data['generals'], $temp);
         }
       
 
         foreach ($plantEntries as $entry) {
-            $temp = array(0 => $entry['plant_id'], 1 => $entry['species_name'], 2 => $entry['description'] );
+            $temp = array(0 => $entry['plant_id'], 1 => $entry['species_name'], 2 => $entry['description'], 3 => $entry['species_name'] );
             array_push($data['plants'], $temp);
         }
         
@@ -44,6 +47,7 @@ class WelcomeController extends Controller
             array_push($data['fishes'], $temp);
         } 
         foreach ($articleEntries as $entry) {
+           
             $temp = array(0 => $entry['id'], 1 => $entry['title'], 2 => $entry['introduction']);
             array_push($data['articles'], $temp);
         }

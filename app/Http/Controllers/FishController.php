@@ -25,6 +25,8 @@ class FishController extends Controller
         $data['description'] = $entry['description'];
         $data['temperature'] = $entry['temperature'];
         $data['water_type'] = $entry['water_type'];
+        $data['food_type'] = $entry['food_type'];
+        $data['harvest_size'] = $entry['harvest_size'];
         $data['habitat'] = $entry['habitat'];
         $data['common_name'] = $entry['common_name'];
         return view("fish", $data);

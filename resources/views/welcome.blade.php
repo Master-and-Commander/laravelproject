@@ -11,12 +11,8 @@
 	</div>
 			
 	 
-	<h1> About </h1>
-	<?php foreach ($generals as $general):  ?>
-		<?php if ($general[0] == "about") : ?>
-	<p>{{$general[1]}}</p>
-	 <?php endif ?>
-	<?php endforeach ?>
+	<h1> About </h1>	
+	<p>{{$about}}</p>	
 	<hr />
 	
 	<h2> New Articles </h2>
@@ -52,9 +48,7 @@
 	<?php endforeach ?>
 	</div>
 
-	<br />
-	<button class="btn btn-secondary">More</button>
-	<br />
+	
 
 	<h2> On Plants </h2>
 	<hr />
@@ -66,24 +60,13 @@
 					<h5 class="card-title">{{$plant[1]}}</h5>
 					<hr class ="hr-card"/>
 					<p class="card-text">{{$plant[2]}}</p>
-					<a href="/plants/{{$plant[0]}}" class="btn btn-primary">Keep Reading</a>
+					<a href="/plants/<?php echo str_replace(" ", "_", $plant[3])?>" class="btn btn-primary">Keep Reading</a>
 				</div>
 		  </div>
 	    </div>
 	<?php endforeach ?>
 	</div>
-    <br />
-	<button class="btn btn-secondary">More</button>
-
-
-	
-	
-	
-	
-		
-		
-	
-	<br />
+   
   </div>
 </div>
 @endsection
